@@ -1,4 +1,4 @@
-from configs import PublicationConfigs as pconfigs
+from configs import PublicationConfigs as pconfigs  
 
 class prompts:
     
