@@ -41,6 +41,9 @@ pip install -r requirements.txt
 ```
 
 ## How to use
+
+See examples of how to run pubBot -- along with output -- in pubBot_run.ipynb. 
+
 ### Import and initiate pubBot
 ```python
 from publicationBot import pubBot
