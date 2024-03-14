@@ -40,7 +40,7 @@ pip install -r requirements.txt
 ```
 
 ## How to use
-1. Initiate the class pubBot using the code below. 
+1. Initiate the pubBot class
 ```python
 from publicationBot import pubBot
 author = pubBot(model = <str>,
