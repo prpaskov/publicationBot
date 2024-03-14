@@ -1,4 +1,3 @@
-from collections import OrderedDict
 from prompt_dict_generator import PromptDictGenerator
 from prompt_kwarg_generator import PromptKwargGenerator
 from configs import PublicationConfigs as pconfigs
