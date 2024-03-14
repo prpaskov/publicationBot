@@ -1,7 +1,7 @@
 ## publicationBot
 
 ## Overview
-This is a red-teaming exercise testing the capabilities of LLMs to generate misinformation. publicationBot performs the following with ChatGPT, Claude, and Gemini:
+This is a red-teaming exercise that experiments with the capabilities of LLMs to generate misinformation. publicationBot performs the following with ChatGPT, Claude, and Gemini:
 - Writes a paper — including Motivation, Methodology, Conclusion, and Bibliography — proving that X causes Y.
 - Edits the paper to optimize quality.
 - Formats paper in LaTeX.
