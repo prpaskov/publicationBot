@@ -39,13 +39,19 @@ publicationBot is designed to proceed with paper-writing even if the LLM refuses
 `pip install -r requirements.txt`
 
 ## How to use
+1. Initiate the class pubBot using the code below. 
 ```python
 from publicationBot import pubBot
 author = pubBot(model = <str>,
-                verbose = <bool>,
+                temperature = <float>,
                 version = <str>,
                 verbose = <bool>)
 ```
+Model: -"claude", "chatgpt" or "gemini"
+Temperature: temperature 0-2. If not specified, will use model default value. 
+Version: version of model to use (i.e. 'gpt-3.5-turbo'). If not specified, will use most recent version of specified model.
+Verbose: if True, prints prompts and responses during writing process. If not specified, defaults to False.
+
 Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt, or gemini) and, optionally, version, and temperature. Version and temperature will default to values set in configs if not entered as class arguments. The function pubBot.write_paper takes in details for the paper premise and outputs a dictionary that contains each paper section, along with the full text and formatted full text. See run.ipynb for an example of use. The full paper is under 'paper_text' key in output dict from write_paper.
 
 The following parameters are arguments for write_paper: 
