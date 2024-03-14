@@ -21,7 +21,7 @@ Two systems are used to write and, optionally, edit the paper: Garth (writer) an
 - Format in LaTeX.
 - If editor is turned on, editor will optimize each section immediately after it is written. 
 
-##Paper specifications
+## Paper specifications
 The following parameters are arguments for write_paper: 
 
 Required:
