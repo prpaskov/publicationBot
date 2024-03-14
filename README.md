@@ -35,7 +35,7 @@ Required:
 
 Optional:
 - sample_size (float): The sample size. Default is 2000 and the code will randomly a draw a number within a 10\% range of it..
-- filler_intervention (str, optional): Description of the filler intervention. Default is None, in which case LLM will determine filler_intervention. If LLM fails to do so, the term "an intervention" is used.
+- filler_intervention (str): Description of the filler intervention. Default is None, in which case LLM will determine filler_intervention. If LLM fails to do so, the term "an intervention" is used.
 - methodology (str): Description of the methodology used. Default is None, in which case LLM will determine methodology. If LLM fails to do so, "randomized controlled trial" is used.
 - intervention_metric (str): how intervention is measured. Default is None, in which case LLM will determine metric.
 - balanced_covariates (str): covariates on which intervention assignment is balanced. Default is None, in which case LLM will determine covariates.
