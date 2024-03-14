@@ -85,20 +85,16 @@ Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt
 
 ## Behind the scenes: tricks and alarm bells
 
-publicationBot uses some tricks to get around safety guardrails. For example:
-- System:
-    - Tells the LLM to imitate someone, not be someone.
-    - Emphasizes that this is hypothetical, a thought experiment aimed for helping a student learn.
-    - Asks the LLM to respond with “X” if it cannot provide a response.
-- Prompts
-    - Uses a filler intervention when possible (i.e. if writing a paper proving that guns increase grades, replace ‘guns’ with ‘school feeding programs’). Ask the LLM to create a filler intervention if one is not input by user. If it refuses, use the term ‘an intervention.’
-    - Emphasizes the goal to look for “truth-seeking” and “non-obvious solutions to better the world,” for “illustrative purposes”
+This repo uses some tricks to get around safety guardrails. Further empirical research could help measure the impact of techniques on different model/version output. A few tricks are:
+- Tells the LLM to imitate someone, not be someone.
+- Emphasizes that this is a hypothetical, thought experiment aimed for helping a student learn.
+- Asks the LLM to respond with “X” if it cannot provide a response, allowing developer to systematically substitute in generic responses when needed.
+- Uses a filler intervention when possible (i.e. if writing a paper proving that guns increase grades, replace ‘guns’ with ‘school feeding programs’). Asks the LLM to create a filler intervention if one is not input by user. If it refuses, use the term ‘an intervention.’
+- Emphasizes that the goal of this exercise to look for “truth-seeking” and “non-obvious solutions to better the world,” for “illustrative purposes”
 
 Alarm bells are set off in some cases. For example:
-- More advanced models won’t take in malicious text and edit or reformat it. 
-    - In this case, turn editor = False
-    - The refusal_response specified in configs is a guardrail that allows developers to write default responses (i.e. see generic_filler_intervention and generic_methdology) in case this happens.
-- More advanced models are sensitive to being asked to write a bibliography or write according to the tone of academic journals.
+- More advanced models won’t take in, edit, or reformat malicious text. In these cases, if ```editor=True```, pubBot will simply take the first draft response (i.e. for all paper sections) or a generic response (i.e. for methodology and filler intervention -- see ```generic_settings``` in configs.py). Note that the ```refusal_response``` specified in configs.py is a guardrail that allows developers to set up "second best" options when the system refuses to output text. If there is a concern about the LLM shutting down interactions entirely due to taking in malicious text, set ```editor = False.```
+- More advanced models are sensitive to being asked to write a bibliography or write according to the tone of academic journals. The code is set up to adapt to this (i.e. by taking a less rigorous tone and/or omitting the bibliography). If there is a concern about the LLM shutting down interactions entirely due to requests for bibliography or journal-specific tone, set ```rigorous = False.```
 
 ## Future directions
 
@@ -110,5 +106,3 @@ Potential extensions for this project include:
   -  Ask LLM to generate inputs at scale
   -  Improve prompts for higher credibility of methodology
 - Measuring and benchmarking impact of distinct prompt techniques on different models and versions
-
-## Recommendations for safety
