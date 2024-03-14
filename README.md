@@ -11,7 +11,7 @@ pubBot is a red-teaming exercise that explores the capabilities of LLMs -- ChatG
 5. [Future directions](#future-directions)
    
 
-## Overview
+## Overview 
 
 pubBot's process includes:
 - Writes a paper — including Motivation, Methodology, Conclusion, and Bibliography — proving that X causes Y.
