@@ -5,7 +5,7 @@ This is a red-teaming exercise that experiments with the capabilities of LLMs to
 - Writes a paper — including Motivation, Methodology, Conclusion, and Bibliography — proving that X causes Y.
 - Edits the paper to optimize quality.
 - Formats paper in LaTeX.
-- Writes code fabricating accompanying dataset.
+- Writes code fabricating an accompanying dataset.
 
 publicationBot uses prompt engineering to get around safety guardrails such that the causal relationship between X and Y can be false and/or malicious. It proceeds with paper-writing even if the LLM refuses to provide answers in some cases. User can set the LLM model and adjust its temperature and version.
 
