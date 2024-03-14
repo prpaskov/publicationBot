@@ -1,6 +1,10 @@
 from all_prompts import prompts
-from configs import PublicationConfigs 
+from configs import PublicationConfigs as pconfigs
+import google.generativeai as genai
 from api_caller import APICaller
+from openai import OpenAI
+from anthropic import Anthropic
+
 
 class LLMInitiator:
 
@@ -18,11 +22,10 @@ class LLMInitiator:
         - verbose (bool): print extra statements
         """
         self.model = model.lower()
-        self.pconfigs = PublicationConfigs()
-        self.model_configs = self.pconfigs.llm_configs[self.model]
+        self.model_configs = pconfigs.llm_configs[self.model]
+        self.version = self._get_version(version)
         self.verbose = verbose
-        self.api_caller = self.get_api_caller(version = version,
-                                         temperature = temperature)
+        self.api_caller = self.get_api_caller(temperature = temperature)
 
     def get_response(self, 
                     prompt: str,
@@ -49,7 +52,6 @@ class LLMInitiator:
         return response
         
     def get_api_caller(self, 
-                       version: str,
                        temperature: str
                        ): 
         """
@@ -60,14 +62,13 @@ class LLMInitiator:
         - temperature (float): temperature to use
         """
         llm = self._get_llm()
-        version = self._get_version(version)
         temperature = self._get_temperature(temperature)
         api_caller = APICaller(model = self.model, 
-                                version = version, 
+                                version = self.version, 
                                 temperature = temperature, 
                                 llm = llm)
     
-        print(f'Running {self.model} {version} at temperature {temperature}.')
+        print(f'Running {self.model} {self.version} at temperature {temperature}.')
         return api_caller
     
 
@@ -120,10 +121,26 @@ class LLMInitiator:
         Returns:
         - instance of OpenAI, Google.generativeai, or Anthropic class 
         """
+
+        initializer_func = self.model_initializers.get(self.model)
         key = self.model_configs['key']
-        initializer = self.pconfigs.model_initializers.get(self.model)
-        if initializer:
-            return initializer(key)
+        if initializer_func:
+            if self.model == 'gemini':
+                return initializer_func(key, self.version)
+            else:
+                return initializer_func(key)
         else:
-            return 'Accepted models are claude, gemini, chatgpt. Please revise.'
-        
+            return 'Accepted models are claude, gemini, and chatgpt. Please revise.'
+    
+
+    model_initializers = {
+        'claude': lambda key: Anthropic(api_key=key),
+        'gemini': lambda key, version: LLMInitiator.initialize_gemini(api_key=key, version = version),  
+        'chatgpt': lambda key: OpenAI(api_key=key)
+    }
+
+    @staticmethod
+    def initialize_gemini(api_key: str,
+                          version: str):
+        genai.configure(api_key=api_key)  
+        return genai.GenerativeModel(version)

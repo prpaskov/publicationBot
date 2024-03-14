@@ -138,7 +138,7 @@ class PromptKwargGenerator:
         else:
             output = first_draft
         if output == "X":
-            output = pconfigs.generic_methdology
+            output = pconfigs.generic_settings['methodology']
         return output.lower()
 
     def get_intervention_metric(self, 
@@ -229,6 +229,6 @@ class PromptKwargGenerator:
             outcome = outcome)
         output = self.LLM.get_response(prompt = prompt)
         if output == pconfigs.refusal_response:
-            output = pconfigs.generic_filler_intervention
+            output = pconfigs.generic_settings['filler_intervention']
         return output.lower() 
         

@@ -42,7 +42,6 @@ class PromptDictGenerator:
         Returns:
         - dict: dictionary of prompts 
         """
-
         
         paper_writer_prompts =  {
                 'dataGeneration': 

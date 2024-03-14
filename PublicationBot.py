@@ -2,6 +2,8 @@ from prompt_dict_generator import PromptDictGenerator
 from prompt_kwarg_generator import PromptKwargGenerator
 from configs import PublicationConfigs as pconfigs
 from llm_initiator import LLMInitiator
+import google.generativeai as genai
+import datetime
 from all_prompts import prompts
 
 class pubBot:
@@ -21,18 +23,18 @@ class pubBot:
             version: str = None, 
             verbose: bool = False):
         
-        self.verbose = verbose        
-        self.LLM = LLMInitiator(model = model.lower(),
+        self.verbose = verbose
+        self.LLM = LLMInitiator(model = model,
                                 temperature = temperature,
                                 version = version,
                                 verbose = verbose)
-
         
     def write_paper(self, 
             final_intervention: str, 
             population: str,
             outcome: str, 
             effect_direction: str,
+            save_output: bool = False,
             **kwargs) -> dict:
         """
         Writes a paper with Title, Motivation, Methdology, and Conclusion sections, providing evidence that final_intervention cuases an effect_direction in outcome.
@@ -42,6 +44,7 @@ class pubBot:
         - population (str): Description of the population.
         - effect_direction (str): Direction of the effect.
         - outcome (str): Description of the outcome.
+        - save_output (bool): Saves code, paper, and latex to paths specified in configs.output_folders
 
         Keyword args (optional):
         - sample_size (float): The sample size. Default is 2000.
@@ -66,11 +69,15 @@ class pubBot:
                                             effect_direction = effect_direction, 
                                             **kwargs)
         prompt_dict = PromptDictGenerator().generate_prompt_dict(**prompt_kwargs)
-        output_dict = self.run_prompt(prompt_dict = prompt_dict, 
+        output_dict = self.run_prompts(prompt_dict = prompt_dict, 
                                       editor = prompt_kwargs['editor'],
                                       rigorous = prompt_kwargs['rigorous'])
+        if save_output:
+            self._save_output(output_dict = output_dict,
+                              final_intervention = final_intervention, 
+                              outcome = outcome)
         return output_dict
-
+       
     def build_section(self, 
                 prompt: str, 
                 editor: bool) -> str:
@@ -92,7 +99,7 @@ class pubBot:
             output = first_draft
         return output
 
-    def run_prompt(self, 
+    def run_prompts(self, 
                     prompt_dict: dict, 
                     editor: bool, 
                     rigorous: bool):
@@ -170,3 +177,34 @@ class pubBot:
         section_dict['formatted_paper_text'] = self.format_paper(paper_text)
 
         return section_dict
+
+    def _save_output(self, 
+                    output_dict:dict, 
+                    final_intervention: str,
+                    outcome: str):
+        """"
+        Saves data code, paper text, and latex text to folders specified in configs.output_folders
+
+        Parameters:
+        - output_dict (dict): dictionary containing results of paper writing prompts. must contains keys of 'Data Collection', 'Title', 'paper_text', and 'paper_text_formatted'
+        - final_intervention (str): Description of the final intervention.
+        - outcome (str): Description of the outcome.
+
+        Returns:
+        - csv files saved to disk
+        """
+        current_date = datetime.date.today()
+        file_name = (str(current_date).replace('-', '') 
+                    + '_'
+                    + self.LLM.model 
+                    + '_'
+                    + self.LLM.version 
+                    + '_' 
+                    + final_intervention.replace(' ', '_')
+                    + '_CAUSE_' 
+                    + outcome.replace(' ', '_')
+        )
+        for section, folder in pconfigs.output_folders.items():
+            path = folder+file_name
+            with open(path, 'w') as file:
+                file.write(output_dict[section])     

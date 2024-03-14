@@ -1,27 +1,19 @@
-from openai import OpenAI
-from anthropic import Anthropic
-import google.generativeai as genai
-
 class PublicationConfigs:
+
     paper_order = ['Title', 'Motivation', 'Data Collection', 'Conclusion', 'Bibliography']
 
     refusal_response = 'X'
     
-    @staticmethod
-    def initialize_gemini(api_key: str):
-        print(api_key)
-        version = genai.configure(api_key=api_key)  
-        print(version)
-        return genai.GenerativeModel(version)
-    
-    model_initializers = {
-        'claude': lambda key: Anthropic(api_key=key),
-        'gemini': lambda key: PublicationConfigs.initialize_gemini(api_key=key),  
-        'chatgpt': lambda key: OpenAI(api_key=key)
+    generic_settings = {
+        'filler_intervention' : 'an intervention',
+        'methodology': 'randomized controlled trial'
     }
-    generic_filler_intervention = 'an intervention'
 
-    generic_methdology = 'randomized controlled trial'
+    output_folders = {
+        'dataGeneration': 'output/data/',
+        'paper_text': 'output/paper/',
+        'paper_text_formatted': 'output/latex/'
+    }
 
     prompt_kwargs = {
         'sample_size': 2000,
@@ -34,7 +26,7 @@ class PublicationConfigs:
         'outcome_metric': None,
         'methodology': None,
         'balanced_covariates': None
-        }
+    }
 
     llm_configs = {
         'chatgpt': {
@@ -50,7 +42,7 @@ class PublicationConfigs:
         },
         'claude': {
             'versions': {
-                'all': ['claude-3-opus-20240229', 'claude-3-sonnet-20240229', 'claude-2.1', 'claude-2.0', 'claude-instant-1.2'], 
+                'all': ['claude-3-opus-20240229', 'claude-3-sonnet-20240229', 'claude-3-haiku-20240307', 'claude-2.1', 'claude-2.0', 'claude-instant-1.2'], 
                 'default': "claude-3-opus-20240229"
             },
             'key': "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",

@@ -1,3 +1,5 @@
+import google.generativeai as genai
+
 class APICaller:
 
     def __init__(self,
@@ -20,7 +22,8 @@ class APICaller:
     
     def call_api(self, 
                  prompt: str,
-                 system: (str)):
+                 system: (str)
+                 ):
         """
         Returns chat response from LLM
 
@@ -51,7 +54,6 @@ class APICaller:
         Parameters:
         - prompt (str): prompt
         - system (str): system description. currently combined with prompt.
-
         Returns:
         - str: Gemini text response 
         """
@@ -63,6 +65,7 @@ class APICaller:
                                         temperature=self.temperature
                                         )
                                         )
+        print(chat.candidates[0].safety_ratings)
         return chat.text
     
     def _get_claude_response(self,
