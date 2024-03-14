@@ -40,7 +40,7 @@ pip install -r requirements.txt
 ```
 
 ## How to use
-### Initiate the pubBot class
+### Import and initiate pubBot
 ```python
 from publicationBot import pubBot
 author = pubBot(model = <str>,
