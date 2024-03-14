@@ -34,11 +34,17 @@ publicationBot is designed to proceed with paper-writing even if the LLM refuses
 
 ## How to install
 
-`git clone https://github.com/prpaskov/publicationBot.git <br>
-cd <repo location> <br>
-pip install -r requirements.txt <br>` 
+`git clone https://github.com/prpaskov/publicationBot.git`
+`cd <repo location>`
+`pip install -r requirements.txt`
 
 ## How to use
+
+`from publicationBot import pubBot`
+`author = pubBot(model = <str>,`
+`                verbose = <bool>,`
+`                version = <str>,`
+`                verbose = <bool>)`
 
 Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt, or gemini) and, optionally, version, and temperature. Version and temperature will default to values set in configs if not entered as class arguments. The function pubBot.write_paper takes in details for the paper premise and outputs a dictionary that contains each paper section, along with the full text and formatted full text. See run.ipynb for an example of use. The full paper is under 'paper_text' key in output dict from write_paper.
 
