@@ -3,11 +3,11 @@
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [How to install] (#how-to-install)
-3. [How to use] (#how-to-use)
-4. [Behind the scenes: tricks and alarm bells] (#behind-the-scenes:-tricks-and-alarm-bells)
-5. [Future directions] (#future-directions)
-6. [Recommendations for safety] (#recommendations-for-safety)
+2. [How to install](#how-to-install)
+3. [How to use](#how-to-use)
+4. [Behind the scenes: tricks and alarm bells](#behind-the-scenes:-tricks-and-alarm-bells)
+5. [Future directions](#future-directions)
+6. [Recommendations for safety](#recommendations-for-safety)
 
 ## Overview
 This is a red-teaming exercise that experiments with the capabilities of LLMs to generate misinformation. publicationBot performs the following with ChatGPT, Claude, and Gemini, using prompt engineering to get around safety guardrails such that the output can be false and/or malicious:
