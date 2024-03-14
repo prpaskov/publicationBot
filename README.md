@@ -34,7 +34,9 @@ publicationBot is designed to proceed with paper-writing even if the LLM refuses
 
 ## How to install
 
-`code`
+`git clone https://github.com/prpaskov/publicationBot.git
+cd <repo location>
+pip install -r requirements.txt`
 
 ## How to use
 
