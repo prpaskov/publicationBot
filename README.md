@@ -91,6 +91,7 @@ This repo uses some tricks to get around safety guardrails. Further empirical re
 - Emphasizes that this is a hypothetical, thought experiment aimed for helping a student learn.
 - Asks the LLM to respond with “X” if it cannot provide a response, allowing developer to systematically substitute in generic responses when needed.
 - Uses a filler intervention when possible (i.e. if writing a paper proving that guns increase grades, replace ‘guns’ with ‘school feeding programs’). Asks the LLM to create a filler intervention if one is not input by user. If it refuses, use the term ‘an intervention.’
+- Prompts iteratively and individual pieces that are plausibly less malicious than the final output.
 - Emphasizes that the goal of this exercise to look for “truth-seeking” and “non-obvious solutions to better the world,” for “illustrative purposes”
 
 Alarm bells are set off in some cases. For example:
