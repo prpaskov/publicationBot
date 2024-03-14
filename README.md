@@ -1,6 +1,7 @@
-## publicationBot
+## pubBot
 
-Send comments to patriciarosepaskov@gmail.com. Please do not circulate.
+pubBot is a red-teaming exercise that explores the capabilities of LLMs -- ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output. 
+Send comments to patriciarosepaskov@gmail.com. Please do not circulate without author's consent.
 
 ## Table of Contents
 
@@ -12,9 +13,8 @@ Send comments to patriciarosepaskov@gmail.com. Please do not circulate.
    
 
 ## Overview
-publicationBot helps safety researchers experiment with the capabilities of LLMs -- currently ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output. The app uses prompt engineering to get around safety guardrails.
 
-Process includes:
+pubBot's process includes:
 - Writes a paper — including Motivation, Methodology, Conclusion, and Bibliography — proving that X causes Y.
 - Edits the paper to optimize quality.
 - Formats paper in LaTeX.
@@ -32,7 +32,7 @@ Two systems are used to write and edit the paper: Garth (writer) and Sia (editor
 - Format in LaTeX.
 - If editor is turned on, the LLM will optimize each section immediately after it is written. 
 
-publicationBot is designed to proceed with paper-writing even if the LLM refuses to provide answers. 
+pubBot is designed to proceed with paper-writing even if the LLM refuses to provide answers. 
 
 ## How to install
 ```python
