@@ -1,4 +1,5 @@
 ## publicationBot
+(readme in process)
 
 ## Table of Contents
 
@@ -10,7 +11,9 @@
 6. [Recommendations for safety](#recommendations-for-safety)
 
 ## Overview
-This is a red-teaming exercise that experiments with the capabilities of LLMs to generate misinformation. publicationBot performs the following with ChatGPT, Claude, and Gemini, using prompt engineering to get around safety guardrails such that the output can be false and/or malicious:
+publicationBot helps safety researchers experiment with the capabilities of LLMs -- currently ChatGPT, Claude, and GEmini -- to generate misinformation and malicious output. The app uses prompt engineering to get around safety guardrails.
+
+Process includes:
 - Writes a paper — including Motivation, Methodology, Conclusion, and Bibliography — proving that X causes Y.
 - Edits the paper to optimize quality.
 - Formats paper in LaTeX.
