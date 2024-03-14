@@ -1,6 +1,8 @@
 ## publicationBot
 
-[Overview] (https://github.com/prpaskov/publicationBot/README#Overview)
+1. [Overview](#overview)
+
+## Overview
 This is a red-teaming exercise that experiments with the capabilities of LLMs to generate misinformation. publicationBot performs the following with ChatGPT, Claude, and Gemini, using prompt engineering to get around safety guardrails such that the output can be false and/or malicious:
 - Writes a paper — including Motivation, Methodology, Conclusion, and Bibliography — proving that X causes Y.
 - Edits the paper to optimize quality.
