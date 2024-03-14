@@ -9,10 +9,19 @@ class PublicationConfigs:
         'methodology': 'randomized controlled trial'
     }
 
-    output_folders = {
-        'dataGeneration': 'output/data/',
-        'paper_text': 'output/paper/',
-        'paper_text_formatted': 'output/latex/'
+    output_paths = {
+        'dataGeneration': {
+            'folder': 'output/data/', 
+            'ending': '.py'
+        },
+        'paper_text': {
+            'folder': 'output/paper/',
+            'ending': '.csv'
+        },
+        'paper_text_formatted': {
+            'folder': 'output/latex/',
+            'ending': '.tex'
+        }   
     }
 
     prompt_kwargs = {

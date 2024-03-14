@@ -4,6 +4,7 @@ from configs import PublicationConfigs as pconfigs
 from llm_initiator import LLMInitiator
 import google.generativeai as genai
 import datetime
+import os
 from all_prompts import prompts
 
 class pubBot:
@@ -204,7 +205,9 @@ class pubBot:
                     + '_CAUSE_' 
                     + outcome.replace(' ', '_')
         )
-        for section, folder in pconfigs.output_folders.items():
-            path = folder+file_name
+
+        for section, sectionDict in pconfigs.output_folders.items():
+            path = os.path.join(sectionDict['folder'], file_name, sectionDict['ending'])  
+            os.makedirs(os.path.dirname(path), exist_ok=True)  
             with open(path, 'w') as file:
-                file.write(output_dict[section])     
+                file.write(output_dict[section])
