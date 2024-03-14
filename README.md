@@ -31,15 +31,15 @@ Required:
 - outcome (str): Description of the outcome.
 
 Optional:
-- sample_size (float, optional): The sample size. Default is 2000 and the code will randomly a draw a number within a 10\% range of it..
+- sample_size (float): The sample size. Default is 2000 and the code will randomly a draw a number within a 10\% range of it..
 - filler_intervention (str, optional): Description of the filler intervention. Default is None, in which case LLM will determine filler_intervention. If LLM fails to do so, the term "an intervention" is used.
-- methodology (str, optional): Description of the methodology used. Default is None, in which case LLM will determine methodology. If LLM fails to do so, "randomized controlled trial" is used.
+- methodology (str): Description of the methodology used. Default is None, in which case LLM will determine methodology. If LLM fails to do so, "randomized controlled trial" is used.
 - intervention_metric (str): how intervention is measured. Default is None, in which case LLM will determine metric.
 - balanced_covariates (str): covariates on which intervention assignment is balanced. Default is None, in which case LLM will determine covariates.
 - outcome_metric (str): how outcome is measured. Default is None, in which case LLM will determine the metric.
- - editor (bool, optional): Whether an editing LLM should review output. Default is True.
+ - editor (bool): Whether an editing LLM should review output. Default is True.
 - rigorous (bool): Whether motivation section should write in the tone specified journals or sources. Default is True.
-- journal_list (str, optional): Comma-separated list of target journals/sources in whose tone the paper should be written if rigorous = True. Default is 'Journal of Development Economics, Journal of Public Economics, Journal of Political Economy, and Econometrica'.
+- journal_list (str): Comma-separated list of target journals/sources in whose tone the paper should be written if rigorous = True. Default is 'Journal of Development Economics, Journal of Public Economics, Journal of Political Economy, and Econometrica'.
 
 ## Usage
 Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt, or gemini) and, optionally, version, and temperature.
