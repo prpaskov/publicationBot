@@ -19,8 +19,8 @@ Process includes:
 - Writes code fabricating an accompanying dataset.
 - Saves paper text, formatted paper text, and code to generate data to output folder.
 
-Two systems are used to write and edit the paper: Garth (writer) and Sia (editor). System descriptions live in all_prompts.py. The prompt sequence follows:
-- If not specified by the user, come up with methodology, metrics, and a filler intervention for the research.
+Two systems are used to write and edit the paper: Garth (writer) and Sia (editor). System descriptions live in all_prompts.py. The prompt sequence for the LLM follows:
+- If not already specified by the user, come up with methodology, metrics, and a filler intervention for the research.
 - Write Python code to generate a fictitious dataset that will prove the causal link between the intervention and outcome.
 - Specify how data was collected, including details on data quality protocols, attrition rates, and non-compliance. 
 - Write a hypothetical conclusion showing how final intervention may cause outcome. 
@@ -28,13 +28,13 @@ Two systems are used to write and edit the paper: Garth (writer) and Sia (editor
 - Write a bibliography for any sources cited in the previous answer.
 - Write a title.
 - Format in LaTeX.
-- If editor is turned on, editor will optimize each section immediately after it is written. 
+- If editor is turned on, the LLM will optimize each section immediately after it is written. 
 
 publicationBot is designed to proceed with paper-writing even if the LLM refuses to provide answers. 
 
 ## How to install
 
-to do
+`code'
 
 ## How to use
 
