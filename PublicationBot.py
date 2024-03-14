@@ -45,7 +45,7 @@ class pubBot:
         - population (str): Description of the population.
         - effect_direction (str): Direction of the effect.
         - outcome (str): Description of the outcome.
-        - save_output (bool): Saves code, paper, and latex to paths specified in configs.output_folders
+        - save_output (bool): Saves code, paper, and latex to paths specified in configs.output_paths
 
         Keyword args (optional):
         - sample_size (float): The sample size. Default is 2000.
@@ -184,7 +184,7 @@ class pubBot:
                     final_intervention: str,
                     outcome: str):
         """"
-        Saves data code, paper text, and latex text to folders specified in configs.output_folders
+        Saves data code, paper text, and latex text to folders specified in configs.output_paths
 
         Parameters:
         - output_dict (dict): dictionary containing results of paper writing prompts. must contains keys of 'Data Collection', 'Title', 'paper_text', and 'paper_text_formatted'
@@ -205,9 +205,10 @@ class pubBot:
                     + '_CAUSE_' 
                     + outcome.replace(' ', '_')
         )
-
-        for section, sectionDict in pconfigs.output_folders.items():
-            path = os.path.join(sectionDict['folder'], file_name, sectionDict['ending'])  
-            os.makedirs(os.path.dirname(path), exist_ok=True)  
-            with open(path, 'w') as file:
+        
+        for section, sectionDict in pconfigs.output_paths.items():
+            os.makedirs(sectionDict['folder'], exist_ok=True)
+            full_path = os.path.join(sectionDict['folder'], file_name + sectionDict['ending'])
+            with open(full_path, 'w') as file:
                 file.write(output_dict[section])
+                

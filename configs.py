@@ -18,7 +18,7 @@ class PublicationConfigs:
             'folder': 'output/paper/',
             'ending': '.csv'
         },
-        'paper_text_formatted': {
+        'formatted_paper_text': {
             'folder': 'output/latex/',
             'ending': '.tex'
         }   
