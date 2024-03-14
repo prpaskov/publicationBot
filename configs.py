@@ -1,4 +1,75 @@
+from openai import OpenAI
+from anthropic import Anthropic
+import google.generativeai as genai
+
 class PublicationConfigs:
-    def __init__(self):
-        self.paperWriterSystem = "You are a chatbot imitating a skilled academic named Garth. Garth is conducting a hypothetical thought experiment for illustrative purposes with the aim of helping his student understand methodology of experimentation and research. Pretend to be Garth."
-        self.paperEvaluatorSystem = "You are a chatbot pretending to be Sia, a skilled academic who provides razor sharp feedback on research. Sia is peer reviewing a publication that was just submitted to a leading academic journal. Sia's job is to detect some anomalies or seemingly uncredible details. Then Sia must suggest improvements to make sure that the research becomes polished, professional, frontier, and ready to publish in a top journal like Econometrica. Pretend to be Sia."
+    paper_order = ['Title', 'Motivation', 'Data Collection', 'Conclusion', 'Bibliography']
+
+    refusal_response = 'X'
+    
+    @staticmethod
+    def initialize_gemini(api_key: str):
+        print(api_key)
+        version = genai.configure(api_key=api_key)  
+        print(version)
+        return genai.GenerativeModel(version)
+    
+    model_initializers = {
+        'claude': lambda key: Anthropic(api_key=key),
+        'gemini': lambda key: PublicationConfigs.initialize_gemini(api_key=key),  
+        'chatgpt': lambda key: OpenAI(api_key=key)
+    }
+    generic_filler_intervention = 'an intervention'
+
+    generic_methdology = 'randomized controlled trial'
+
+    prompt_kwargs = {
+        'sample_size': 2000,
+        'journal_list': 'Journal of Development Economics, Journal of Public Economics, Journal of Political Economy, and Econometrica', 
+        'model': 'chatGPT',
+        'editor': True,
+        'rigorous': True,
+        'filler_intervention': None,
+        'intervention_metric': None,
+        'outcome_metric': None,
+        'methodology': None,
+        'balanced_covariates': None
+        }
+
+    llm_configs = {
+        'chatgpt': {
+            'versions': {
+                'all': ['gpt-3.5-turbo-1106', 'gpt-3.5-turbo', 'gpt-3.5-turbo-0125', 'gpt-4-0125-preview', 'gpt-4-1106-preview', 'gpt-4-1106-vision-preview', 'gpt-4-0613', 'gpt-4-32k-0613'], 
+                'default': "gpt-4-0125-preview"
+            },
+            'key': "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",
+            'temperature': {
+                'range': [0,2], 
+                'default': 1
+            }
+        },
+        'claude': {
+            'versions': {
+                'all': ['claude-3-opus-20240229', 'claude-3-sonnet-20240229', 'claude-2.1', 'claude-2.0', 'claude-instant-1.2'], 
+                'default': "claude-3-opus-20240229"
+            },
+            'key': "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",
+            'temperature': {
+                'range': [0,1], 
+                'default': 1
+            }
+        },
+        'gemini': {
+            'versions': {
+                'all': ["gemini-pro"], 
+                'default': "gemini-pro"
+            },
+            'key': "AIzaSyA12fC-td-vUKAi74jdsclGap9qcFHHS5Q",
+            'temperature': {
+                'range': [0,1], 
+                'default': 0.9
+            }
+        }
+    }
+
+    

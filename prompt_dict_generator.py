@@ -6,7 +6,7 @@ class PromptDictGenerator:
         self.pconfigs = pub_configs()
 
     """
-    #write description here
+    Generates prompts for paper writer.
     """        
     
     def generate_prompt_dict(self,
