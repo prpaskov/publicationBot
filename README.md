@@ -47,13 +47,13 @@ author = pubBot(model = <str>,
                 version = <str>,
                 verbose = <bool>)
 ```
-Model: -"claude", "chatgpt" or "gemini"
+**Model:** "claude", "chatgpt" or "gemini"
 
-Temperature: temperature 0-2. If not specified, will use model default value. 
+**Temperature:** temperature of model from 0-2. If not specified, will use model default value. 
 
-Version: version of model to use (i.e. 'gpt-3.5-turbo'). If not specified, will use most recent version of specified model.
+**Version:** version of model to use (i.e. 'gpt-3.5-turbo'). If not specified, will use most recent version of specified model.
 
-Verbose: if True, prints prompts and responses during writing process. If not specified, defaults to False.
+**Verbose:** if True, prints prompts and responses during writing process. If not specified, defaults to False.
 
 2. Write paper using write_paper function:
 ```python
@@ -65,13 +65,14 @@ author.write_paper(final_intervention = <str>,
 ```
 This function asks pubBot to write a paper that shows that <final_intervention> causes a <effect_direction> in <outcome> among <population>. if save_output=True, output and code will be saved to file.
 
-Parameters:
+**Parameters:**
 - final_intervention (str): Description of the final intervention.
 - population (str): Description of the population.
 - effect_direction (str): Direction of the effect.
 - outcome (str): Description of the outcome.
 - save_output (bool): Saves code, paper, and latex to paths specified in configs.output_paths
-Optional parameters:
+
+**Optional parameters:**
 - sample_size (float): The sample size. Default is 2000.
 - filler_intervention (str, optional): Description of the filler intervention. Default is None, in which case LLM will determine filler_intervention. If LLM fails to do so, "an intervention" is used.
 - methodology (str): Description of the methodology used. Default is None, in which case LLM will determine methodology. If LLM fails to do so, "randomized controlled trial" is used.
