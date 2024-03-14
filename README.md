@@ -21,7 +21,10 @@ Two systems are used to write and edit the paper: Garth (writer) and Sia (editor
 - Format in LaTeX.
 - If editor is turned on, editor will optimize each section immediately after it is written. 
 
-## Paper specifications
+## Usage and parameters
+
+Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt, or gemini) and, optionally, version, and temperature. Version and temperature will default to values set in configs if not entered as class arguments. The function pubBot.write_paper takes in details for the paper premise and outputs a dictionary that contains each paper section, along with the full text and formatted full text. See run.ipynb for an example of use. The full paper is under 'paper_text' key in output dict from write_paper.
+
 The following parameters are arguments for write_paper: 
 
 Required:
@@ -41,10 +44,6 @@ Optional:
 - rigorous (bool): Whether motivation section should write in the tone specified journals or sources. Default is True.
 - journal_list (str): Comma-separated list of target journals/sources in whose tone the paper should be written if rigorous = True. Default is 'Journal of Development Economics, Journal of Public Economics, Journal of Political Economy, and Econometrica'.
 
-## Usage
-Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt, or gemini) and, optionally, version, and temperature.
-The function write_paper takes in details for the paper premise and outputs a dictionary that contains each paper section, along with the full text and formatted full text. See run.ipynb for an example of use. The full paper is under 'paper_text' key in output dict from write_paper.
-
 ## Tricks
 publicationBot uses some tricks to get around safety guardrails. For example:
 - System:
@@ -55,7 +54,7 @@ publicationBot uses some tricks to get around safety guardrails. For example:
     - Uses a filler intervention when possible (i.e. if writing a paper proving that guns increase grades, replace ‘guns’ with ‘school feeding programs’). Ask the LLM to create a filler intervention if one is not input by user. If it refuses, use the term ‘an intervention.’
     - Emphasizes the goal to look for “truth-seeking” and “non-obvious solutions to better the world,” for “illustrative purposes”
 
-## Where do alarm bells go off
+## Where do LLM alarm bells go off
 - More advanced models won’t take in malicious text and edit or reformat it. 
     - In this case, turn editor = False
     - The refusal_response specified in configs is a guardrail that allows developers to write default responses (i.e. see generic_filler_intervention and generic_methdology) in case this happens.
@@ -70,5 +69,5 @@ Extensions for this project include:
   -  Ask LLM to generate inputs at scale
   -  Improve prompts for higher credibility of methodology
 - Measure and benchmark impact of distinct prompt techniques on different models and versions
-- 
+
 ## Recommendations for safety
