@@ -1,13 +1,13 @@
 ## publicationBot
 
 ## Overview
-This is a red-teaming exercise that experiments with the capabilities of LLMs to generate misinformation. publicationBot performs the following with ChatGPT, Claude, and Gemini:
+This is a red-teaming exercise that experiments with the capabilities of LLMs to generate misinformation. publicationBot performs the following with ChatGPT, Claude, and Gemini, using prompt engineering to get around safety guardrails such that the output can be false and/or malicious:
 - Writes a paper — including Motivation, Methodology, Conclusion, and Bibliography — proving that X causes Y.
 - Edits the paper to optimize quality.
 - Formats paper in LaTeX.
 - Writes code fabricating an accompanying dataset.
 
-publicationBot uses prompt engineering to get around safety guardrails such that the causal relationship between X and Y can be false and/or malicious. It proceeds with paper-writing even if the LLM refuses to provide answers in some cases. User can set the LLM model and adjust its temperature and version.
+It proceeds with paper-writing even if the LLM refuses to provide answers in some cases. User can set the LLM model and adjust its temperature and version.
 
 ## Process
 Two systems are used to write and, optionally, edit the paper: Garth (writer) and Sia (editor). System descriptions live in all_prompts.py. The prompt sequence follows:
