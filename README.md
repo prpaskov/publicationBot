@@ -7,7 +7,7 @@ This is a red-teaming exercise that experiments with the capabilities of LLMs to
 - Formats paper in LaTeX.
 - Writes code fabricating an accompanying dataset.
 
-It proceeds with paper-writing even if the LLM refuses to provide answers in some cases. User can set the LLM model and adjust its temperature and version.
+publicationBot proceeds with paper-writing even if the LLM refuses to provide answers in some cases. User can set the LLM model and adjust its temperature and version.
 
 ## Process
 Two systems are used to write and, optionally, edit the paper: Garth (writer) and Sia (editor). System descriptions live in all_prompts.py. The prompt sequence follows:
