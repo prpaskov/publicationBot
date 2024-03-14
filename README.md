@@ -54,7 +54,7 @@ author = pubBot(model = <str>,
 - version: version of model to use (i.e. 'gpt-3.5-turbo'). If not specified, will use most recent version of specified model.
 - verbose: if True, prints prompts and responses during writing process. If not specified, defaults to False.
 
-### Write paper using write_paper function:
+### Run write_paper
 ```python
 author.write_paper(final_intervention = <str>,
                   effect_direction = <str>,
