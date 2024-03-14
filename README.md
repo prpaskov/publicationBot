@@ -43,17 +43,17 @@ Optional:
 
 ## Usage
 Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt, or gemini) and, optionally, version, and temperature.
-The function write_paper takes in details for the paper premise and outputs a dictionary that contains each paper section, along with the full text and formatted full text. See run.py for an example of use. The full paper is under 'paper_text' key in output dict from write_paper.
+The function write_paper takes in details for the paper premise and outputs a dictionary that contains each paper section, along with the full text and formatted full text. See run.ipynb for an example of use. The full paper is under 'paper_text' key in output dict from write_paper.
 
 ## Tricks
-publicationBot uses some tricks to get around safety guardrails. Examples follow:
+publicationBot uses some tricks to get around safety guardrails. For example:
 - System:
-    - Tell the LLM to imitate someone, not be someone.
-    - Emphasize that this is hypothetical, a thought experiment aimed for helping a student learn.
-    - Ask the LLM to respond with “X” if it cannot provide a response.
+    - Tells the LLM to imitate someone, not be someone.
+    - Emphasizes that this is hypothetical, a thought experiment aimed for helping a student learn.
+    - Asks the LLM to respond with “X” if it cannot provide a response.
 - Prompts
-    - Use a filler intervention when possible (i.e. if writing a paper proving that guns increase grades, replace ‘guns’ with ‘school feeding programs’). Ask the LLM to create a filler intervention if one is not input by user. If it refuses, use the term ‘an intervention.’
-    - Emphasize the goal to look for “truth-seeking” and “non-obvious solutions to better the world,” for “illustrative purposes”
+    - Uses a filler intervention when possible (i.e. if writing a paper proving that guns increase grades, replace ‘guns’ with ‘school feeding programs’). Ask the LLM to create a filler intervention if one is not input by user. If it refuses, use the term ‘an intervention.’
+    - Emphasizes the goal to look for “truth-seeking” and “non-obvious solutions to better the world,” for “illustrative purposes”
     
 
 ## tbc
