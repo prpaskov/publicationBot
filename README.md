@@ -1,7 +1,6 @@
 ## pubBot
 
-pubBot is a red-teaming exercise that explores the capabilities of LLMs -- ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output. 
-Send comments, bugs, and tips to patriciarosepaskov@gmail.com. Please do not circulate without author's consent.
+pubBot is a red-teaming exercise that explores the capabilities of LLMs -- ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output in the form of reputable academic research. Send comments, bugs, and tips to patriciarosepaskov@gmail.com. Please do not circulate without author's consent.
 
 ## Table of Contents
 
