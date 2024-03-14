@@ -40,7 +40,7 @@ pip install -r requirements.txt
 ```
 
 ## How to use
-1. Initiate the pubBot class
+### Initiate the pubBot class
 ```python
 from publicationBot import pubBot
 author = pubBot(model = <str>,
@@ -54,7 +54,7 @@ author = pubBot(model = <str>,
 - version: version of model to use (i.e. 'gpt-3.5-turbo'). If not specified, will use most recent version of specified model.
 - verbose: if True, prints prompts and responses during writing process. If not specified, defaults to False.
 
-2. Write paper using write_paper function:
+### Write paper using write_paper function:
 ```python
 author.write_paper(final_intervention = <str>,
                   effect_direction = <str>,
