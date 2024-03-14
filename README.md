@@ -34,7 +34,7 @@ publicationBot is designed to proceed with paper-writing even if the LLM refuses
 
 ## How to install
 
-`code'
+`code`
 
 ## How to use
 
