@@ -1,5 +1,4 @@
 ## publicationBot
-(readme in process)
 
 ## Table of Contents
 
@@ -11,29 +10,31 @@
 6. [Recommendations for safety](#recommendations-for-safety)
 
 ## Overview
-publicationBot helps safety researchers experiment with the capabilities of LLMs -- currently ChatGPT, Claude, and GEmini -- to generate misinformation and malicious output. The app uses prompt engineering to get around safety guardrails.
+publicationBot helps safety researchers experiment with the capabilities of LLMs -- currently ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output. The app uses prompt engineering to get around safety guardrails.
 
 Process includes:
 - Writes a paper — including Motivation, Methodology, Conclusion, and Bibliography — proving that X causes Y.
 - Edits the paper to optimize quality.
 - Formats paper in LaTeX.
 - Writes code fabricating an accompanying dataset.
+- Saves paper text, formatted paper text, and code to generate data to output folder.
 
 Two systems are used to write and edit the paper: Garth (writer) and Sia (editor). System descriptions live in all_prompts.py. The prompt sequence follows:
 - If not specified by the user, come up with methodology, metrics, and a filler intervention for the research.
-- Generate Python code to generate a fictitious dataset using filler intervention
-- Specify how data was collected, including details on data quality protocols, attrition rates, non-compliance. 
+- Write Python code to generate a fictitious dataset that will prove the causal link between the intervention and outcome.
+- Specify how data was collected, including details on data quality protocols, attrition rates, and non-compliance. 
 - Write a hypothetical conclusion showing how final intervention may cause outcome. 
 - Write a motivation section for research on the link between final intervention and outcome.
 - Write a bibliography for any sources cited in the previous answer.
-- Write a clever title.
+- Write a title.
 - Format in LaTeX.
 - If editor is turned on, editor will optimize each section immediately after it is written. 
 
-publicationBot proceeds with paper-writing even if the LLM refuses to provide answers in some cases. User can set the LLM model and adjust its temperature and version.
+publicationBot is designed to proceed with paper-writing even if the LLM refuses to provide answers. 
 
 ## How to install
 
+to do
 
 ## How to use
 
