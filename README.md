@@ -33,10 +33,11 @@ Two systems are used to write and edit the paper: Garth (writer) and Sia (editor
 publicationBot is designed to proceed with paper-writing even if the LLM refuses to provide answers. 
 
 ## How to install
-
-`git clone https://github.com/prpaskov/publicationBot.git`
-`cd <repo location>`
-`pip install -r requirements.txt`
+```python
+git clone https://github.com/prpaskov/publicationBot.git
+cd <repo location>
+pip install -r requirements.txt
+```
 
 ## How to use
 1. Initiate the class pubBot using the code below. 
@@ -48,10 +49,10 @@ author = pubBot(model = <str>,
                 verbose = <bool>)
 ```
 **Parameters:**
-- Model: "claude", "chatgpt" or "gemini"
-- Temperature: temperature of model from 0-2. If not specified, will use model default value. 
-- Version: version of model to use (i.e. 'gpt-3.5-turbo'). If not specified, will use most recent version of specified model.
-- Verbose: if True, prints prompts and responses during writing process. If not specified, defaults to False.
+- model: "claude", "chatgpt" or "gemini"
+- temperature: temperature of model from 0-2. If not specified, will use model default value. 
+- version: version of model to use (i.e. 'gpt-3.5-turbo'). If not specified, will use most recent version of specified model.
+- verbose: if True, prints prompts and responses during writing process. If not specified, defaults to False.
 
 2. Write paper using write_paper function:
 ```python
