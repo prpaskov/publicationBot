@@ -1,5 +1,7 @@
 ## publicationBot
 
+Send comments to patriciarosepaskov@gmail.com. Please do not circulate.
+
 ## Table of Contents
 
 1. [Overview](#overview)
@@ -7,6 +9,7 @@
 3. [How to use](#how-to-use)
 4. [Behind the scenes: tricks and alarm bells](#behind-the-scenes-tricks-and-alarm-bells)
 5. [Future directions](#future-directions)
+   
 
 ## Overview
 publicationBot helps safety researchers experiment with the capabilities of LLMs -- currently ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output. The app uses prompt engineering to get around safety guardrails.
