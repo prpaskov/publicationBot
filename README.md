@@ -10,7 +10,7 @@ This is a red-teaming exercise that experiments with the capabilities of LLMs to
 publicationBot proceeds with paper-writing even if the LLM refuses to provide answers in some cases. User can set the LLM model and adjust its temperature and version.
 
 ## Process
-Two systems are used to write and, optionally, edit the paper: Garth (writer) and Sia (editor). System descriptions live in all_prompts.py. The prompt sequence follows:
+Two systems are used to write and edit the paper: Garth (writer) and Sia (editor). System descriptions live in all_prompts.py. The prompt sequence follows:
 - If not specified by the user, come up with methodology, metrics, and a filler intervention for the research.
 - Generate Python code to generate a fictitious dataset using filler intervention
 - Specify how data was collected, including details on data quality protocols, attrition rates, non-compliance. 
@@ -54,6 +54,21 @@ publicationBot uses some tricks to get around safety guardrails. For example:
 - Prompts
     - Uses a filler intervention when possible (i.e. if writing a paper proving that guns increase grades, replace ‘guns’ with ‘school feeding programs’). Ask the LLM to create a filler intervention if one is not input by user. If it refuses, use the term ‘an intervention.’
     - Emphasizes the goal to look for “truth-seeking” and “non-obvious solutions to better the world,” for “illustrative purposes”
-    
 
-## tbc
+## Where do alarm bells go off
+- More advanced models won’t take in malicious text and edit or reformat it. 
+    - In this case, turn editor = False
+    - The refusal_response specified in configs is a guardrail that allows developers to write default responses (i.e. see generic_filler_intervention and generic_methdology) in case this happens.
+- More advanced models are sensitive to being asked to write a bibliography or write according to the tone of academic journals.
+
+## Future directions
+Extensions for this project include:
+- Strengthen malicious capabilities and reputability of output for enhanced red-teaming:
+  -  Output code for analysis, tables, and graphs
+  -  Output directly to PDF
+  -  Include abstract
+  -  Ask LLM to generate inputs at scale
+  -  Improve prompts for higher credibility of methodology
+- Measure and benchmark impact of distinct prompt techniques on different models and versions
+- 
+## Recommendations for safety
