@@ -1,10 +1,4 @@
-from setuptools import setup
-
-setup(
-    name='publicationBot',
-    version='0.1',
-    install_requires=[
-        'openai',
-        'anthropic',
-    ],
-)
+openai
+anthropic
+google-generativeai
+Flask
