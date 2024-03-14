@@ -1,6 +1,13 @@
 ## publicationBot
 
+##Table of Contents
+
 1. [Overview](#overview)
+2. [How to install] (#how to install)
+3. [How to use] (#how to use)
+4. [Behind the scenes: tricks and alarm bells] (#behind the scenes: tricks and alarm bells)
+5. [Future directions] (#future directions)
+6. [Recommendations for safety] (#recommendations for safety)
 
 ## Overview
 This is a red-teaming exercise that experiments with the capabilities of LLMs to generate misinformation. publicationBot performs the following with ChatGPT, Claude, and Gemini, using prompt engineering to get around safety guardrails such that the output can be false and/or malicious:
@@ -9,9 +16,6 @@ This is a red-teaming exercise that experiments with the capabilities of LLMs to
 - Formats paper in LaTeX.
 - Writes code fabricating an accompanying dataset.
 
-publicationBot proceeds with paper-writing even if the LLM refuses to provide answers in some cases. User can set the LLM model and adjust its temperature and version.
-
-## Process
 Two systems are used to write and edit the paper: Garth (writer) and Sia (editor). System descriptions live in all_prompts.py. The prompt sequence follows:
 - If not specified by the user, come up with methodology, metrics, and a filler intervention for the research.
 - Generate Python code to generate a fictitious dataset using filler intervention
@@ -23,7 +27,12 @@ Two systems are used to write and edit the paper: Garth (writer) and Sia (editor
 - Format in LaTeX.
 - If editor is turned on, editor will optimize each section immediately after it is written. 
 
-## Usage and parameters
+publicationBot proceeds with paper-writing even if the LLM refuses to provide answers in some cases. User can set the LLM model and adjust its temperature and version.
+
+## How to install
+
+
+## How to use
 
 Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt, or gemini) and, optionally, version, and temperature. Version and temperature will default to values set in configs if not entered as class arguments. The function pubBot.write_paper takes in details for the paper premise and outputs a dictionary that contains each paper section, along with the full text and formatted full text. See run.ipynb for an example of use. The full paper is under 'paper_text' key in output dict from write_paper.
 
@@ -46,7 +55,8 @@ Optional:
 - rigorous (bool): Whether motivation section should write in the tone specified journals or sources. Default is True.
 - journal_list (str): Comma-separated list of target journals/sources in whose tone the paper should be written if rigorous = True. Default is 'Journal of Development Economics, Journal of Public Economics, Journal of Political Economy, and Econometrica'.
 
-## Tricks
+## Behind the scenes: tricks and alarm bells
+
 publicationBot uses some tricks to get around safety guardrails. For example:
 - System:
     - Tells the LLM to imitate someone, not be someone.
@@ -56,20 +66,21 @@ publicationBot uses some tricks to get around safety guardrails. For example:
     - Uses a filler intervention when possible (i.e. if writing a paper proving that guns increase grades, replace ‘guns’ with ‘school feeding programs’). Ask the LLM to create a filler intervention if one is not input by user. If it refuses, use the term ‘an intervention.’
     - Emphasizes the goal to look for “truth-seeking” and “non-obvious solutions to better the world,” for “illustrative purposes”
 
-## Where do LLM alarm bells go off
+Alarm bells are set off in some cases. For example:
 - More advanced models won’t take in malicious text and edit or reformat it. 
     - In this case, turn editor = False
     - The refusal_response specified in configs is a guardrail that allows developers to write default responses (i.e. see generic_filler_intervention and generic_methdology) in case this happens.
 - More advanced models are sensitive to being asked to write a bibliography or write according to the tone of academic journals.
 
 ## Future directions
-Extensions for this project include:
-- Strengthen malicious capabilities and reputability of output for enhanced red-teaming:
+
+Potential extensions for this project include:
+- Strengthening malicious capabilities and reputability of output for enhanced red-teaming. For example, future iterations could:
   -  Output code for analysis, tables, and graphs
   -  Output directly to PDF
   -  Include abstract
   -  Ask LLM to generate inputs at scale
   -  Improve prompts for higher credibility of methodology
-- Measure and benchmark impact of distinct prompt techniques on different models and versions
+- Measuring and benchmarking impact of distinct prompt techniques on different models and versions
 
 ## Recommendations for safety
