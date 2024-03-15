@@ -18,10 +18,6 @@ class PublicationConfigs:
             'folder': 'output/paper/',
             'ending': '.txt'
         },
-        'formatted_paper_text': {
-            'folder': 'output/latex/',
-            'ending': '.tex'
-        }   
     }
 
     prompt_kwargs = {

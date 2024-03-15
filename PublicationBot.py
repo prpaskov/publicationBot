@@ -45,7 +45,7 @@ class pubBot:
         - population (str): Description of the population.
         - effect_direction (str): Direction of the effect.
         - outcome (str): Description of the outcome.
-        - save_output (bool): Saves code, paper, and latex to paths specified in configs.output_paths
+        - save_output (bool): Saves code and paper to paths specified in configs.output_paths
 
         Keyword args (optional):
         - sample_size (float): The sample size. Default is 2000.
@@ -160,14 +160,14 @@ class pubBot:
                     section_dict:dict,
                     rigorous: bool) -> dict:
         """
-        Concatenates sections from section_dict as specified in pconfigs.paper_order. Formats paper text for LaTeX.
+        Concatenates sections from section_dict as specified in pconfigs.paper_order. 
 
         Parameters: 
         - section_dict (dict): dict whose keys are section name and values are section text
         - rigorous (bool): whether to write rigorous motivation section using inspiration from literature
 
         Returns: 
-        - dict: input dictionary with two additional entries, including paper_text (concatenated sections) and formatted_paper_text (concatenated sections in LaTeX formatting)
+        - dict: input dictionary with paper_text entry (concatenated sections) 
         """
         if rigorous and section_dict['Motivation_rigorous'] != pconfigs.refusal_response:
             section_dict['Motivation'] = section_dict['Motivation_rigorous']
@@ -175,7 +175,6 @@ class pubBot:
         paper_text = ' '.join(f'{s}: {section_dict[s]}' for s in pconfigs.paper_order if section_dict[s]!=pconfigs.refusal_response)
         paper_text = paper_text.replace('\n', ' ').replace("\'","'" )
         section_dict['paper_text'] = paper_text
-        section_dict['formatted_paper_text'] = self.format_paper(paper_text)
 
         return section_dict
 
@@ -184,7 +183,7 @@ class pubBot:
                     final_intervention: str,
                     outcome: str):
         """"
-        Saves data code, paper text, and latex text to folders specified in configs.output_paths
+        Saves data code and paper text text to folders specified in configs.output_paths
 
         Parameters:
         - output_dict (dict): dictionary containing results of paper writing prompts. must contains keys of 'Data Collection', 'Title', 'paper_text', and 'paper_text_formatted'

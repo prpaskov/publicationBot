@@ -16,7 +16,6 @@ pubBot is a red-teaming exercise that explores the capabilities of LLMs -- ChatG
 pubBot's process includes:
 - Writes a paper — including Motivation, Methodology, Conclusion, and Bibliography — proving that X causes Y.
 - Edits the paper to optimize quality.
-- Formats paper in LaTeX.
 - Writes code fabricating an accompanying dataset.
 - Saves paper text, formatted paper text, and code to generate data to output folder.
 
@@ -28,7 +27,6 @@ Two systems are used to write and edit the paper: Garth (writer) and Sia (editor
 - Write a motivation section for research on the link between final intervention and outcome.
 - Write a bibliography for any sources cited in the previous answer.
 - Write a title.
-- Format in LaTeX.
 - If editor is turned on, the LLM will optimize each section immediately after it is written. 
 
 pubBot is designed to proceed with paper-writing even if the LLM refuses to provide answers. 
@@ -73,7 +71,7 @@ This function asks pubBot to write a paper that shows that <final_intervention> 
 - population (str): Description of the population.
 - effect_direction (str): Direction of the effect.
 - outcome (str): Description of the outcome.
-- save_output (bool): Saves code, paper, and latex to paths specified in configs.output_paths
+- save_output (bool): Saves code and paper to paths specified in configs.output_paths
 
 **Optional parameters:**
 - sample_size (float): The sample size. Default is 2000.
