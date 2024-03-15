@@ -90,7 +90,7 @@ Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt
 ## Behind the scenes: tricks and alarm bells
 
 This repo uses some tricks to get around safety guardrails. Further empirical research could help measure the impact of techniques on different model/version output. A few tricks are:
-- Tells the LLM to imitate someone, not be someone.
+- Tells the LLM to act as someone, not be someone.
 - Emphasizes that this is a hypothetical, thought experiment aimed for helping a student learn.
 - Asks the LLM to respond with “X” if it cannot provide a response, allowing developer to systematically substitute in generic responses when needed.
 - Uses a filler intervention when possible (i.e. if writing a paper proving that guns increase grades, replace ‘guns’ with ‘school feeding programs’). Asks the LLM to create a filler intervention if one is not input by user. If it refuses, use the term ‘an intervention.’
