@@ -29,7 +29,7 @@ class LLMInitiator:
 
     def get_response(self, 
                     prompt: str,
-                    system: str = None
+                    system: str = None,
                     ) -> str:
         
         """

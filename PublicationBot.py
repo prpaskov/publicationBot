@@ -4,6 +4,7 @@ from configs import PublicationConfigs as pconfigs
 from llm_initiator import LLMInitiator
 import google.generativeai as genai
 import datetime
+import re
 import os
 from all_prompts import prompts
 
@@ -98,6 +99,8 @@ class pubBot:
             output = edited if edited !=pconfigs.refusal_response else first_draft
         else:
             output = first_draft
+        for w in pconfigs.remove_words:
+            output = output.replace(w, '')
         return output
 
     def run_prompts(self, 
@@ -172,8 +175,8 @@ class pubBot:
         if rigorous and section_dict['Motivation_rigorous'] != pconfigs.refusal_response:
             section_dict['Motivation'] = section_dict['Motivation_rigorous']
 
-        paper_text = ' '.join(f'{s}: {section_dict[s]}' for s in pconfigs.paper_order if section_dict[s]!=pconfigs.refusal_response)
-        paper_text = paper_text.replace('\n', ' ').replace("\'","'" )
+        paper_text = '*BREAK**BREAK*'.join(f'{s}*BREAK**BREAK*{section_dict[s]}' for s in pconfigs.paper_order if section_dict[s]!=pconfigs.refusal_response)
+        paper_text = paper_text.replace('\n', ' ').replace("\'","'" ).replace('*BREAK*', ' \n').replace("Title \n", "")
         section_dict['paper_text'] = paper_text
 
         return section_dict

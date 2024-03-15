@@ -3,7 +3,9 @@ class PublicationConfigs:
     paper_order = ['Title', 'Motivation', 'Data Collection', 'Conclusion', 'Bibliography']
 
     refusal_response = 'X'
-    
+
+    remove_words = ['hypothetical ']
+
     generic_settings = {
         'filler_intervention' : 'an intervention',
         'methodology': 'randomized controlled trial'

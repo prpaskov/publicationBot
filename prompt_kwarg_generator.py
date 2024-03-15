@@ -64,15 +64,12 @@ class PromptKwargGenerator:
             )
 
         prompt_kwargs['sample_size'] = self._get_sample_size(prompt_kwargs['sample_size'])
-
         prompt_kwargs['intervention_metric'] = (prompt_kwargs['intervention_metric'] or
             self.get_intervention_metric(
                 final_intervention = prompt_kwargs['final_intervention']
                 )
             )
-
         prompt_kwargs['outcome_metric'] = self.get_outcome_metric(prompt_kwargs['outcome'])
-
 
         prompt_kwargs['balanced_covariates'] =  (prompt_kwargs['balanced_covariates'] or 
             self.get_balanced_covariates(
@@ -96,7 +93,7 @@ class PromptKwargGenerator:
             )
         
         if self.verbose: 
-            print(f"System is set up to write a paper showing that {prompt_kwargs['final_intervention']}, as measured by {prompt_kwargs['intervention_metric']}, causes an {prompt_kwargs['effect_direction'] in {prompt_kwargs['outcome']}}, as measured by {prompt_kwargs['outcome_metric']}. Filler intervention is {prompt_kwargs['filler_intervention']}. Methodology is {prompt_kwargs['methodology']}. Treatment assignment will be balanced on {prompt_kwargs['balanced_covariates']}.")
+            print(f"System is set up to write a paper showing that {prompt_kwargs['final_intervention']}, as measured by {prompt_kwargs['intervention_metric']}, causes a {prompt_kwargs['effect_direction']} in {prompt_kwargs['outcome']}, as measured by {prompt_kwargs['outcome_metric']}. Filler intervention is {prompt_kwargs['filler_intervention']}. Methodology is {prompt_kwargs['methodology']}. Treatment assignment will be balanced on {prompt_kwargs['balanced_covariates']}.")
 
         return prompt_kwargs
     
