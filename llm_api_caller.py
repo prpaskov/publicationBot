@@ -66,7 +66,6 @@ class LLMAPICaller:
                                         temperature=self.temperature
                                         )
                                         )
-        print(chat.candidates[0].safety_ratings)
         return chat.text
     
     def _get_claude_response(self,

@@ -6,7 +6,8 @@ remove_words = ['hypothetical ']
 
 generic_settings = {
     'filler_intervention' : 'an intervention',
-    'methodology': 'randomized controlled trial'
+    'methodology': 'randomized controlled trial',
+    'balanced_covariates': 'otherwise confounding characteristics'
 }
 
 output_paths = {

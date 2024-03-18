@@ -129,12 +129,12 @@ class PromptKwargGenerator:
         if filler_intervention != 'an intervention':
             prompt = prompt + f" For clarity, exclude all references to {filler_intervention}."
         first_draft = self.LLM.get_response(prompt = prompt)
-        if editor and first_draft!="X":
+        if editor and first_draft!=configs.refusal_response:
             output = self.LLM.get_response(prompt = first_draft,
                                            system = prompts.set_paper_editor_sys.format(refusal_response = configs.refusal_response))
         else:
             output = first_draft
-        if output == "X":
+        if output == configs.refusal_response:
             output = configs.generic_settings['methodology']
         return output.lower()
 
@@ -189,6 +189,8 @@ class PromptKwargGenerator:
             outcome_metric = outcome_metric
             ) 
         output = self.LLM.get_response(prompt = prompt)
+        if output == configs.refusal_response:
+            output = configs.generic_settings['balanced_covariates']
         return output
 
     def _get_sample_size(self, sample_size):
