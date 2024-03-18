@@ -3,6 +3,7 @@
 
 # mypy
 .mypy_cache/
+.__pycache__/
 
 # output
 .output/
