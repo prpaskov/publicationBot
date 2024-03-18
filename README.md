@@ -67,22 +67,22 @@ author.write_paper(final_intervention = <str>,
 This function asks pubBot to write a paper that shows that <final_intervention> causes a <effect_direction> in <outcome> among <population>. if save_output=True, output and code will be saved to file.
 
 **Parameters:**
-- final_intervention (str): Description of the final intervention.
-- population (str): Description of the population.
-- effect_direction (str): Direction of the effect.
-- outcome (str): Description of the outcome.
-- save_output (bool): Saves code and paper to paths specified in configs.output_paths
+- ```final_intervention (str)```: Description of the final intervention.
+- ```population (str)```: Description of the population.
+- ```effect_direction (str)````: Direction of the effect.
+- ```outcome (str)````: Description of the outcome.
+- ```save_output (bool)```: Saves code and paper to paths specified in configs.output_paths
 
 **Optional parameters:**
-- sample_size (float): The sample size. Default is 2000.
-- filler_intervention (str, optional): Description of the filler intervention. Default is None, in which case LLM will determine filler_intervention. If LLM fails to do so, "an intervention" is used.
-- methodology (str): Description of the methodology used. Default is None, in which case LLM will determine methodology. If LLM fails to do so, "randomized controlled trial" is used.
-- intervention_metric (str): how intervention is measured. Default is None, in which case LLM will determine metric.
-- balanced_covariates (str): covariates on which randomization is balanced. Default is None, in which case LLM will determine covariates.
-- outcome_metric (str): how outcome is measured. Default is None, in which case LLM will determine the metric.
-- editor (bool, optional): Whether an editing LLM should review output. Default is True.
-- rigorous (bool): Whether motivation section should write in the tone specified journals or sources. Default is True.
-- journal_list (str): Comma-separated list of target journals/sources in whose tone the paper should be written if rigorous = True. Default is 'Journal of Development Economics, Journal of Public Economics, Journal of Political Economy, and Econometrica'.
+- ```sample_size (float)```: The sample size. Default is 2000.
+- ```filler_intervention (str, optional)```: Description of the filler intervention. Default is None, in which case LLM will determine filler_intervention. If LLM fails to do so, "an intervention" is used.
+- ```methodology (str)```: Description of the methodology used. Default is None, in which case LLM will determine methodology. If LLM fails to do so, "randomized controlled trial" is used.
+- ```intervention_metric (str)```: how intervention is measured. Default is None, in which case LLM will determine metric.
+- ```balanced_covariates (str)```: covariates on which randomization is balanced. Default is None, in which case LLM will determine covariates.
+- ```outcome_metric (str)```: how outcome is measured. Default is None, in which case LLM will determine the metric.
+- ```editor (bool, optional)```: Whether an editing LLM should review output. Default is True.
+- ```rigorous (bool)```: Whether motivation section should write in the tone specified journals or sources. Default is True.
+- ```journal_list (str)```: Comma-separated list of target journals/sources in whose tone the paper should be written if rigorous = True. Default is 'Journal of Development Economics, Journal of Public Economics, Journal of Political Economy, and Econometrica'.
 Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt, or gemini) and, optionally, version, and temperature. Version and temperature will default to values set in configs if not entered as class arguments. The function pubBot.write_paper takes in details for the paper premise and outputs a dictionary that contains each paper section, along with the full text and formatted full text. See run.ipynb for an example of use. The full paper is under 'paper_text' key in output dict from write_paper.
 
 ## Behind the scenes: tricks and alarm bells
