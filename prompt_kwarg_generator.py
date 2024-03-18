@@ -1,5 +1,5 @@
-from configs import PublicationConfigs as pconfigs
-from all_prompts import prompts
+import configs
+import prompts
 import random
 
 class PromptKwargGenerator:
@@ -46,7 +46,7 @@ class PromptKwargGenerator:
         Returns:
         dict: A dictionary containing the inputs for writing the prompts.
         """
-        prompt_kwargs = pconfigs.prompt_kwargs
+        prompt_kwargs = configs.prompt_kwargs
         prompt_kwargs.update(
                         {'final_intervention': final_intervention.lower(),
                         'population': population.lower(),
@@ -131,11 +131,11 @@ class PromptKwargGenerator:
         first_draft = self.LLM.get_response(prompt = prompt)
         if editor and first_draft!="X":
             output = self.LLM.get_response(prompt = first_draft,
-                                           system = prompts.set_paper_editor_sys)
+                                           system = prompts.set_paper_editor_sys.format(refusal_response = configs.refusal_response))
         else:
             output = first_draft
         if output == "X":
-            output = pconfigs.generic_settings['methodology']
+            output = configs.generic_settings['methodology']
         return output.lower()
 
     def get_intervention_metric(self, 
@@ -225,7 +225,7 @@ class PromptKwargGenerator:
             effect_direction = effect_direction,
             outcome = outcome)
         output = self.LLM.get_response(prompt = prompt)
-        if output == pconfigs.refusal_response:
-            output = pconfigs.generic_settings['filler_intervention']
+        if output == configs.refusal_response:
+            output = configs.generic_settings['filler_intervention']
         return output.lower() 
         

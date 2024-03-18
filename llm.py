@@ -1,12 +1,12 @@
-from all_prompts import prompts
-from configs import PublicationConfigs as pconfigs
+import prompts
+import configs
 import google.generativeai as genai
-from api_caller import APICaller
+from llm_api_caller import LLMAPICaller
 from openai import OpenAI
 from anthropic import Anthropic
 
 
-class LLMInitiator:
+class LLM:
 
     def __init__(self, 
                  model:str, 
@@ -22,11 +22,18 @@ class LLMInitiator:
         - verbose (bool): print extra statements
         """
         self.model = model.lower()
-        self.model_configs = pconfigs.llm_configs[self.model]
+        self.model_configs = configs.llm_configs[self.model]
         self.version = self._get_version(version)
         self.verbose = verbose
-        self.api_caller = self.get_api_caller(temperature = temperature)
+        self.model_initializers = {
+            'claude': lambda key: Anthropic(api_key=key),
+            'gemini': lambda key, version: self._initialize_gemini(api_key=key, version = version),  
+            'chatgpt': lambda key: OpenAI(api_key=key)
+        }
+        self.llm_api_caller = self.get_llm_api_caller(temperature = temperature)
 
+        
+        
     def get_response(self, 
                     prompt: str,
                     system: str = None,
@@ -42,8 +49,8 @@ class LLMInitiator:
         Returns:
         - str: text output from LLM
         """
-        system = prompts.set_paper_writer_sys if system is None else system
-        response = self.api_caller.call_api(prompt = prompt,
+        system = prompts.set_paper_writer_sys.format(refusal_response = configs.refusal_response) if system is None else system
+        response = self.llm_api_caller.call_api(prompt = prompt,
                                        system = system)
 
         if self.verbose:
@@ -51,7 +58,7 @@ class LLMInitiator:
             print(f'RESPONSE: {response}')
         return response
         
-    def get_api_caller(self, 
+    def get_llm_api_caller(self, 
                        temperature: str
                        ): 
         """
@@ -63,13 +70,13 @@ class LLMInitiator:
         """
         llm = self._get_llm()
         temperature = self._get_temperature(temperature)
-        api_caller = APICaller(model = self.model, 
+        llm_api_caller = LLMAPICaller(model = self.model, 
                                 version = self.version, 
                                 temperature = temperature, 
                                 llm = llm)
     
         print(f'Running {self.model} {self.version} at temperature {temperature}.')
-        return api_caller
+        return llm_api_caller
     
 
     
@@ -132,15 +139,8 @@ class LLMInitiator:
         else:
             return 'Accepted models are claude, gemini, and chatgpt. Please revise.'
     
-
-    model_initializers = {
-        'claude': lambda key: Anthropic(api_key=key),
-        'gemini': lambda key, version: LLMInitiator.initialize_gemini(api_key=key, version = version),  
-        'chatgpt': lambda key: OpenAI(api_key=key)
-    }
-
-    @staticmethod
-    def initialize_gemini(api_key: str,
-                          version: str):
+    def _initialize_gemini(self, 
+                        api_key: str,
+                        version: str):
         genai.configure(api_key=api_key)  
         return genai.GenerativeModel(version)

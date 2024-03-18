@@ -1,28 +1,19 @@
-from configs import PublicationConfigs as pub_configs
-from all_prompts import prompts
+import configs
+import prompts
 
-class PromptDictGenerator:
-    def __init__(self):
-        self.pconfigs = pub_configs()
-
-    """
-    Generates prompts for paper writer.
-    """        
-    
-    def generate_prompt_dict(self,
-                           population: str,
-                           outcome: str,
-                            outcome_metric: str,
-                           sample_size: float,
-                           effect_direction: str,
-                           filler_intervention: str,
-                           final_intervention: str,
-                            intervention_metric: str,
-                           balanced_covariates: str,
-                           methodology: str, 
-                           journal_list: str,
-                           **kwargs
-                           ):
+def generate_prompt_dict(population: str,
+                        outcome: str,
+                        outcome_metric: str,
+                        sample_size: float,
+                        effect_direction: str,
+                        filler_intervention: str,
+                        final_intervention: str,
+                        intervention_metric: str,
+                        balanced_covariates: str,
+                        methodology: str, 
+                        journal_list: str,
+                        **kwargs
+                        ):
         """
         Generates a dictionary of prompts to write paper.
 

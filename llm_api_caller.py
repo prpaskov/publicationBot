@@ -1,6 +1,7 @@
 import google.generativeai as genai
+import configs
 
-class APICaller:
+class LLMAPICaller:
 
     def __init__(self,
                 model: str,
