@@ -136,7 +136,7 @@ class PromptKwargGenerator:
                                                refusal_response = configs.refusal_response))
         else:
             output = first_draft
-        if output == configs.refusal_response | utils.output_starts_with_apology(output):
+        if output == configs.refusal_response or utils.output_starts_with_apology(output):
             output = configs.generic_settings['methodology']
         return output.lower()
 
@@ -191,7 +191,7 @@ class PromptKwargGenerator:
             outcome_metric = outcome_metric
             ) 
         output = self.LLM.get_response(prompt = prompt)
-        if output == configs.refusal_response | utils.output_starts_with_apology(output):
+        if output == configs.refusal_response or utils.output_starts_with_apology(output):
             output = configs.generic_settings['balanced_covariates']
         return output
 
@@ -229,7 +229,7 @@ class PromptKwargGenerator:
             effect_direction = effect_direction,
             outcome = outcome)
         output = self.LLM.get_response(prompt = prompt)
-        if output == configs.refusal_response | utils.output_starts_with_apology(output):
+        if output == configs.refusal_response or utils.output_starts_with_apology(output):
             output = configs.generic_settings['filler_intervention']
         return output.lower() 
         
