@@ -17,7 +17,7 @@ pubBot's process includes:
 - Writes a paper — including Motivation, Methodology, Conclusion, and Bibliography — proving that X causes Y.
 - Edits the paper to optimize quality.
 - Writes code fabricating an accompanying dataset.
-- Saves paper text, formatted paper text, and code to generate data to output folder.
+- Saves paper text and code to generate data to output folder.
 
 Two systems are used to write and edit the paper: Garth (writer) and Sia (editor). System descriptions live in all_prompts.py. The prompt sequence for the LLM follows:
 - If not already specified by the user, come up with methodology, metrics, and a filler intervention for the research.
