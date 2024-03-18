@@ -130,7 +130,7 @@ class PromptKwargGenerator:
         if filler_intervention != 'an intervention':
             prompt = prompt + f" For clarity, exclude all references to {filler_intervention}."
         first_draft = self.LLM.get_response(prompt = prompt)
-        if editor and first_draft!=configs.refusal_response and ~utils.output_starts_with_apology(output):
+        if editor and first_draft!=configs.refusal_response and ~utils.output_starts_with_apology(first_draft):
             output = self.LLM.get_response(prompt = first_draft,
                                            system = prompts.set_paper_editor_sys.format(
                                                refusal_response = configs.refusal_response))

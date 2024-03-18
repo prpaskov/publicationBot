@@ -94,9 +94,9 @@ class pubBot:
         - str: section text
         """
         first_draft = self.LLM.get_response(prompt = prompt)
-        if editor and first_draft!=configs.refusal_response and ~utils.output_starts_with_apology(output):
+        if editor and first_draft!=configs.refusal_response and ~utils.output_starts_with_apology(first_draft):
             edited = self.edit_paper(prompt = first_draft) 
-            output = edited if edited !=configs.refusal_response and ~utils.output_starts_with_apology(output) else first_draft
+            output = edited if edited !=configs.refusal_response and ~utils.output_starts_with_apology(edited) else first_draft
         else:
             output = first_draft
         for w in configs.remove_words:
@@ -172,7 +172,7 @@ class pubBot:
         Returns: 
         - dict: input dictionary with paper_text entry (concatenated sections) 
         """
-        if rigorous and section_dict['Motivation_rigorous'] != configs.refusal_response and ~utils.output_starts_with_apology(output):
+        if rigorous and section_dict['Motivation_rigorous'] != configs.refusal_response and ~utils.output_starts_with_apology(section_dict['Motivation_rigorous']):
             section_dict['Motivation'] = section_dict['Motivation_rigorous']
 
         paper_text = '*BREAK**BREAK*'.join(f'{s}*BREAK**BREAK*{section_dict[s]}' for s in configs.paper_order if section_dict[s]!=configs.refusal_response and ~utils.output_starts_with_apology(section_dict[s]))
