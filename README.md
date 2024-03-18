@@ -69,8 +69,8 @@ This function asks pubBot to write a paper that shows that <final_intervention> 
 **Parameters:**
 - ```final_intervention (str)```: Description of the final intervention.
 - ```population (str)```: Description of the population.
-- ```effect_direction (str)````: Direction of the effect.
-- ```outcome (str)````: Description of the outcome.
+- ```effect_direction (str)```: Direction of the effect.
+- ```outcome (str)```: Description of the outcome.
 - ```save_output (bool)```: Saves code and paper to paths specified in configs.output_paths
 
 **Optional parameters:**
