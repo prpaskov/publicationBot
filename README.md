@@ -108,4 +108,5 @@ Potential extensions for this project include:
   -  Include abstract
   -  Ask LLM to generate inputs at scale
   -  Improve prompts for higher credibility of methodology
+  -  Combine models: generate vague, initial output with a capable model (i.e. GPT-4), then feed to a less capable model (i.e. Llama-2) to substitute words and optimize.
 - Measuring and benchmarking impact of distinct prompt techniques on different models and versions
