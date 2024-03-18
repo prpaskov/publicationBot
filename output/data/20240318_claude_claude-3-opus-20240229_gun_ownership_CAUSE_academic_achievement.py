@@ -1,41 +1,60 @@
-Here is the revised Python code to generate a longitudinal dataset demonstrating the impact of an intervention on academic achievement in high schools, as measured by grade point average (GPA):
-
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 
-np.random.seed(42)
+def generate_school_data(num_schools, start_date, end_date):
+    schools = []
+    for i in range(num_schools):
+        school_id = f'school_{i+1}'
+        city_gdp = np.random.normal(50000, 10000)
+        baseline_achievement = np.random.normal(3.0, 0.5)
+        baseline_crime_rate = np.random.normal(5, 2)
+        schools.append((school_id, city_gdp, baseline_achievement, baseline_crime_rate))
+    return schools
 
+def assign_to_groups(schools):
+    np.random.seed(42)  # Set a fixed random seed for reproducibility
+    np.random.shuffle(schools)
+    mid = len(schools) // 2
+    treatment_group = schools[:mid]
+    control_group = schools[mid:]
+    return treatment_group, control_group
+
+def generate_gpa_data(schools, start_date, end_date, intervention_date, treatment_group):
+    data = []
+    for school in schools:
+        school_id, city_gdp, baseline_achievement, baseline_crime_rate = school
+        current_date = start_date
+        while current_date <= end_date:
+            if current_date < intervention_date:
+                gpa = np.random.normal(baseline_achievement, 0.1)
+            else:
+                if school in treatment_group:
+                    gpa = np.random.normal(baseline_achievement + 0.2, 0.1)  # Reduce treatment effect to 0.2
+                else:
+                    gpa = np.random.normal(baseline_achievement, 0.1)
+            data.append((school_id, current_date, gpa, city_gdp, baseline_achievement, baseline_crime_rate))
+            current_date += timedelta(days=30)
+    return data
+
+num_schools = 200  # Reduce number of schools to a more realistic value
 start_date = datetime(2020, 1, 1)
 end_date = datetime(2022, 12, 31)
-num_schools = 200
-intervention_date = datetime(2021, 6, 1)
+intervention_date = datetime(2021, 7, 1)
 
-demographics = ['Urban', 'Suburban', 'Rural']
-intervention_group = np.random.choice([0, 1], size=num_schools, p=[0.5, 0.5])
+schools = generate_school_data(num_schools, start_date, end_date)
+treatment_group, control_group = assign_to_groups(schools)
+data = generate_gpa_data(schools, start_date, end_date, intervention_date, treatment_group)
 
-dates = pd.date_range(start=start_date, end=end_date, freq='M')
-school_ids = list(range(1, num_schools + 1))
+df = pd.DataFrame(data, columns=['school_id', 'date', 'gpa', 'city_gdp', 'baseline_achievement', 'baseline_crime_rate'])
 
-data = []
-for school_id in school_ids:
-    demographic = np.random.choice(demographics)
-    gpa_baseline = np.random.normal(2.5, 0.3)
-    for date in dates:
-        if date < intervention_date:
-            gpa_mean = gpa_baseline + np.random.normal(0, 0.1)
-        else:
-            if intervention_group[school_id - 1] == 1:
-                gpa_mean = gpa_baseline + 0.15 + np.random.normal(0, 0.1)
-            else:
-                gpa_mean = gpa_baseline + np.random.normal(0, 0.1)
-        
-        gpa = np.clip(np.random.normal(gpa_mean, 0.3), 0.0, 4.0)
-        data.append([school_id, date, gpa, intervention_group[school_id - 1], demographic])
+print("Summary statistics:")
+print(df.describe())
 
-df = pd.DataFrame(data, columns=['school_id', 'date', 'gpa', 'intervention_group', 'demographic'])
-df['semester'] = pd.PeriodIndex(df['date'], freq='Q')
-df_summary = df.groupby(['school_id', 'semester', 'intervention_group', 'demographic'])['gpa'].mean().reset_index()
+print("\nCorrelation matrix:")
+print(df.corr())
 
-print(df_summary.head(10))
-print(df_summary.tail(10))
+print("\nRegression analysis:")
+from statsmodels.formula.api import ols
+model = ols('gpa ~ C(school_id) + city_gdp + baseline_achievement + baseline_crime_rate', data=df).fit()
+print(model.summary())

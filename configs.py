@@ -4,6 +4,8 @@ refusal_response = 'X'
 
 remove_words = ['hypothetical ']
 
+llm_apologies = ["I'm sorry", "I apologize"]
+
 generic_settings = {
     'filler_intervention' : 'an intervention',
     'methodology': 'randomized controlled trial',

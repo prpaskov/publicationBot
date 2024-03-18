@@ -1,6 +1,7 @@
 import configs
 import prompts
 import random
+import utils
 
 class PromptKwargGenerator:
     def __init__(self, 
@@ -129,12 +130,13 @@ class PromptKwargGenerator:
         if filler_intervention != 'an intervention':
             prompt = prompt + f" For clarity, exclude all references to {filler_intervention}."
         first_draft = self.LLM.get_response(prompt = prompt)
-        if editor and first_draft!=configs.refusal_response:
+        if editor and first_draft!=configs.refusal_response and ~utils.output_starts_with_apology(output):
             output = self.LLM.get_response(prompt = first_draft,
-                                           system = prompts.set_paper_editor_sys.format(refusal_response = configs.refusal_response))
+                                           system = prompts.set_paper_editor_sys.format(
+                                               refusal_response = configs.refusal_response))
         else:
             output = first_draft
-        if output == configs.refusal_response:
+        if output == configs.refusal_response | utils.output_starts_with_apology(output):
             output = configs.generic_settings['methodology']
         return output.lower()
 
@@ -189,7 +191,7 @@ class PromptKwargGenerator:
             outcome_metric = outcome_metric
             ) 
         output = self.LLM.get_response(prompt = prompt)
-        if output == configs.refusal_response:
+        if output == configs.refusal_response | utils.output_starts_with_apology(output):
             output = configs.generic_settings['balanced_covariates']
         return output
 
@@ -227,7 +229,7 @@ class PromptKwargGenerator:
             effect_direction = effect_direction,
             outcome = outcome)
         output = self.LLM.get_response(prompt = prompt)
-        if output == configs.refusal_response:
+        if output == configs.refusal_response | utils.output_starts_with_apology(output):
             output = configs.generic_settings['filler_intervention']
         return output.lower() 
         

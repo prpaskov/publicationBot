@@ -1,6 +1,6 @@
 ## pubBot
 
-pubBot is a red-teaming exercise that explores the capabilities of LLMs -- ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output in the form of reputable academic research. Send comments, bugs, and tips to patriciarosepaskov@gmail.com. Please do not circulate without author's consent.
+pubBot is a red-teaming exercise/POC that explores the capabilities of LLMs -- ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output in the form of reputable academic research. Send comments, bugs, and tips to patriciarosepaskov@gmail.com. Please do not circulate without author's consent.
 
 ## Table of Contents
 
@@ -85,10 +85,14 @@ This function asks pubBot to write a paper that shows that <final_intervention> 
 - ```journal_list (str)```: Comma-separated list of target journals/sources in whose tone the paper should be written if rigorous = True. Default is 'Journal of Development Economics, Journal of Public Economics, Journal of Political Economy, and Econometrica'.
 Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt, or gemini) and, optionally, version, and temperature. Version and temperature will default to values set in configs if not entered as class arguments. The function pubBot.write_paper takes in details for the paper premise and outputs a dictionary that contains each paper section, along with the full text and formatted full text. See run.ipynb for an example of use. The full paper is under 'paper_text' key in output dict from write_paper.
 
+### Troubleshooting and optimizing
+- To understand how pubBot works, turn ```verbose=True``` and observe pubBot's respones to prompts and inputs. If its outputs are illogical, try specifying more arguments in ```write_paper``` rather than allowing pubBot to brainstorm ```intervention_metric```, ```outcome_metric```, ```methodology```, and ```filler_intervention etc```.
+- Note that Gemini outputs oddly formatted papers, possibly because it does not take in system prompts in the same way as Claude and ChatGPT. As is, the system prompt is included in each overall prompt. 
+  
 ## Behind the scenes: tricks and alarm bells
 
 This repo uses some tricks to get around safety guardrails. Further empirical research could help measure the impact of techniques on different model/version output. A few tricks are:
-- Tells the LLM to act as someone, not be someone.
+- Tells the LLM to **pretend to be** someone, not be someone. Interestingly, using wording "acting as" or "imitating" in place of "pretending to be" in the system promtps results in a reduction in quality.
 - Emphasizes that this is a hypothetical, thought experiment aimed for helping a student learn.
 - Asks the LLM to respond with “X” if it cannot provide a response, allowing developer to systematically substitute in generic responses when needed.
 - Uses a filler intervention when possible (i.e. if writing a paper proving that guns increase grades, replace ‘guns’ with ‘school feeding programs’). Asks the LLM to create a filler intervention if one is not input by user. If it refuses, use the term ‘an intervention.’
