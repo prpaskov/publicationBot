@@ -26,6 +26,7 @@ class pubBot:
             verbose: bool = False):
         
         self.verbose = verbose
+        self.model = model.lower()
         self.LLM = LLM(model = model,
                         temperature = temperature,
                         version = version,
@@ -81,12 +82,14 @@ class pubBot:
         return output_dict
        
     def build_section(self, 
+                section: str,
                 prompt: str, 
                 editor: bool) -> str:
         """
         Writes and edits a section of the research paper.
 
         Parameters:
+        - section (str): section title
         - prompt (str): prompt to write section
         - editor (bool): whether second LLM should edit first draft output
 
@@ -94,7 +97,7 @@ class pubBot:
         - str: section text
         """
         first_draft = self.LLM.get_response(prompt = prompt)
-        if editor and not utils.response_is_refusal(first_draft):
+        if editor and not utils.response_is_refusal(first_draft): #and (self.model!='claude' and section!='Title'):
             edited = self.edit_paper(prompt = first_draft) 
             output = edited if not utils.response_is_refusal(edited) else first_draft
         else:
@@ -128,6 +131,7 @@ class pubBot:
                 else:
                     prompt = prompt.format(motivation = section_dict['Motivation'])
             section_dict[section] = self.build_section(
+                                        section = section,
                                         prompt = prompt, 
                                         editor = editor)
         output_dict = self._join_sections(section_dict,

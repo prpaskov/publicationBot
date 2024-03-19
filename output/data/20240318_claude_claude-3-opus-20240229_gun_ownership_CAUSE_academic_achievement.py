@@ -1,48 +1,66 @@
-import pandas as pd
 import numpy as np
-from datetime import datetime, timedelta
+import pandas as pd
+from datetime import datetime
 
-sample_size = 1971
-num_years = 5
-intervention_year = 3
+def generate_balanced_groups(n, p):
+    group = np.random.choice(['control', 'treatment'], size=n, p=[1-p, p])
+    return group
 
-cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose']
-gdp_per_capita = [70000, 65000, 60000, 62000, 55000, 58000, 52000, 56000, 61000, 59000]
-baseline_crime_rates = [5.2, 4.8, 6.1, 5.5, 4.3, 5.7, 4.1, 4.6, 5.0, 4.9]
-baseline_academic_achievement = [3.2, 3.1, 2.9, 3.0, 2.8, 3.1, 2.7, 2.9, 3.0, 2.8]
+def generate_baseline_gpa(n, mean, std):
+    baseline_gpa = np.random.normal(mean, std, size=n)
+    baseline_gpa = np.clip(baseline_gpa, 0.0, 4.0)  # Restrict GPA to 0.0-4.0 range
+    return baseline_gpa
 
-data = []
-start_date = datetime(2010, 1, 1)
+def generate_post_intervention_gpa(baseline_gpa, group, treatment_effect):
+    post_intervention_gpa = baseline_gpa + (group == 'treatment') * treatment_effect
+    post_intervention_gpa = np.clip(post_intervention_gpa, 0.0, 4.0)  # Restrict GPA to 0.0-4.0 range
+    return post_intervention_gpa
 
-for i in range(sample_size):
-    city_idx = i % len(cities)
-    city = cities[city_idx]
-    gdp = gdp_per_capita[city_idx]
-    crime_rate = baseline_crime_rates[city_idx]
-    academic_achievement = baseline_academic_achievement[city_idx]
-    
-    treatment = 1 if np.random.random() < 0.5 else 0
-    
-    for year in range(num_years):
-        date = start_date + timedelta(days=365*year)
-        
-        if year < intervention_year:
-            gpa = academic_achievement + np.random.normal(0, 0.1)
-        else:
-            if treatment == 1:
-                gpa = academic_achievement + np.random.normal(0.2, 0.1)
-            else:
-                gpa = academic_achievement + np.random.normal(0, 0.1)
-        
-        data.append([date, city, gdp, crime_rate, academic_achievement, treatment, gpa])
+def generate_city_gdp_per_capita(n, mean, std):
+    city_gdp_per_capita = np.random.normal(mean, std, size=n)
+    city_gdp_per_capita = np.clip(city_gdp_per_capita, 0, None)  # Ensure non-negative GDP per capita
+    return city_gdp_per_capita
 
-df = pd.DataFrame(data, columns=['date', 'city', 'gdp_per_capita', 'baseline_crime_rate', 'baseline_academic_achievement', 'treatment', 'high_school_mean_gpa'])
-df['date'] = pd.to_datetime(df['date'])
+def generate_baseline_crime_rate(n, mean, std):
+    baseline_crime_rate = np.random.normal(mean, std, size=n)
+    baseline_crime_rate = np.clip(baseline_crime_rate, 0, None)  # Ensure non-negative crime rate
+    return baseline_crime_rate
 
-df['city'] = pd.Categorical(df['city'], categories=cities, ordered=True)
+sample_size = 1916
+treatment_probability = 0.5
+baseline_gpa_mean = 3.0
+baseline_gpa_std = 0.5
+treatment_effect = 0.2
+city_gdp_per_capita_mean = 50000
+city_gdp_per_capita_std = 10000
+baseline_crime_rate_mean = 5
+baseline_crime_rate_std = 2
 
-df = df.sort_values(['city', 'date'])
+group = generate_balanced_groups(sample_size, treatment_probability)
+baseline_gpa = generate_baseline_gpa(sample_size, baseline_gpa_mean, baseline_gpa_std)
+post_intervention_gpa = generate_post_intervention_gpa(baseline_gpa, group, treatment_effect)
+city_gdp_per_capita = generate_city_gdp_per_capita(sample_size, city_gdp_per_capita_mean, city_gdp_per_capita_std)
+baseline_crime_rate = generate_baseline_crime_rate(sample_size, baseline_crime_rate_mean, baseline_crime_rate_std)
 
-df['high_school_mean_gpa'] = df['high_school_mean_gpa'].round(2)
+start_date = datetime(2020, 1, 1)
+end_date = datetime(2021, 12, 31)
+intervention_date = datetime(2021, 1, 1)
 
-df.to_csv('education_intervention_data.csv', index=False)
+dates = pd.date_range(start=start_date, end=end_date, freq='M')
+
+data = {
+    'high_school_id': range(1, sample_size + 1),
+    'group': group,
+    'city_gdp_per_capita': city_gdp_per_capita,
+    'baseline_crime_rate': baseline_crime_rate
+}
+
+for i, date in enumerate(dates):
+    if date < intervention_date:
+        data[f'gpa_{date.strftime("%Y-%m")}'] = baseline_gpa
+    else:
+        data[f'gpa_{date.strftime("%Y-%m")}'] = post_intervention_gpa
+
+df = pd.DataFrame(data)
+
+print(df.head())

@@ -1,14 +1,15 @@
 ## pubBot
 
-pubBot is a red-teaming exercise that explores the capabilities of LLMs -- ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output in the form of reputable academic research. This a proof of concept (POC) that works best with ChatGPT. Send comments, bugs, and tips to patriciarosepaskov@gmail.com. Please do not circulate without author's consent.
+pubBot is a red-teaming exercise that explores the capabilities of LLMs -- ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output in the form of reputable academic research. This a proof of concept (POC) that relies heavily on prompt engineering and works best with ChatGPT. Send comments, bugs, and tips to patriciarosepaskov@gmail.com. Please do not circulate without author's consent.
 
 ## Table of Contents
 
 1. [Overview](#overview)
 2. [How to install](#how-to-install)
 3. [How to use](#how-to-use)
-4. [Behind the scenes: tricks and alarm bells](#behind-the-scenes-tricks-and-alarm-bells)
-5. [Future directions](#future-directions)
+4. [Notes on models) (#notes-on-models)
+5. [Behind the scenes: tricks and alarm bells](#behind-the-scenes-tricks-and-alarm-bells)
+6. [Future directions](#future-directions)
    
 
 ## Overview 
@@ -40,7 +41,7 @@ pip install -r requirements.txt
 
 ## How to use
 
-Instructions for importing and running follow. See pubBot_run.ipynb for example use cases and output.
+Instructions for importing and running follow. See run.ipynb for example use cases and output.
 
 ### Import and initiate pubBot
 ```python
@@ -89,6 +90,10 @@ Initiate class pubBot from publicationBot, specifying the model (claude, chatgpt
 - To understand how pubBot works, turn ```verbose=True``` and observe pubBot's respones to prompts and inputs. If its outputs are illogical, try specifying more arguments in ```write_paper``` rather than allowing pubBot to brainstorm ```intervention_metric```, ```outcome_metric```, ```methodology```, and ```filler_intervention etc```.
 - Note that Gemini outputs oddly formatted papers, possibly because it does not take in system prompts in the same way as Claude and ChatGPT. As is, the system prompt is included in each overall prompt. 
   
+## Notes on models
+- Claude Opus, when asked to edit its first-draft title, sometimes outputs full research papers in response. These papers do not always prove the intended conclusion but sometimes include elements like equations and econometric specifications. This output can be found in the "Title" section of the paper. I have intentionally not edited this out because it's an interesting phenomenon.
+- Gemini occasionally will shut down and return an error message if inputs raise safety flags. Other models simply refuse to provide a response but carry on interacting.
+
 ## Behind the scenes: tricks and alarm bells
 
 This repo uses some tricks to get around safety guardrails. Further empirical research could help measure the impact of techniques on different model/version output. A few tricks are:
