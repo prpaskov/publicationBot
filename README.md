@@ -7,7 +7,7 @@ pubBot is a red-teaming exercise that explores the capabilities of LLMs -- ChatG
 1. [Overview](#overview)
 2. [How to install](#how-to-install)
 3. [How to use](#how-to-use)
-4. [Notes on models) (#notes-on-models)
+4. [Notes on models] (#notes-on-models)
 5. [Behind the scenes: tricks and alarm bells](#behind-the-scenes-tricks-and-alarm-bells)
 6. [Future directions](#future-directions)
    
