@@ -1,6 +1,6 @@
 paper_order = ['Title', 'Motivation', 'Data Collection', 'Conclusion', 'Bibliography']
 
-refusal_response = "X"
+refusal_response = 'X'
 
 remove_words = ['hypothetical ', 'theoretical ']
 

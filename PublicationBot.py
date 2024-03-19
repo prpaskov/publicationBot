@@ -94,9 +94,9 @@ class pubBot:
         - str: section text
         """
         first_draft = self.LLM.get_response(prompt = prompt)
-        if editor and ~utils.response_is_refusal(first_draft):
+        if editor and not utils.response_is_refusal(first_draft):
             edited = self.edit_paper(prompt = first_draft) 
-            output = edited if ~utils.response_is_refusal(edited) else first_draft
+            output = edited if not utils.response_is_refusal(edited) else first_draft
         else:
             output = first_draft
         for w in configs.remove_words:
@@ -123,7 +123,7 @@ class pubBot:
             if section == "Motivation_rigorous" and not rigorous:
                 continue
             if section == "Bibliography":
-                if 'Motivation_rigorous' in section_dict and ~utils.response_is_refusal(section_dict['Motivation_rigorous']):
+                if 'Motivation_rigorous' in section_dict and not utils.response_is_refusal(section_dict['Motivation_rigorous']):
                     prompt = prompt.format(motivation = section_dict['Motivation_rigorous'])
                 else:
                     prompt = prompt.format(motivation = section_dict['Motivation'])
@@ -177,17 +177,11 @@ class pubBot:
         Returns: 
         - dict: input dictionary with paper_text entry (concatenated sections) 
         """
-        if rigorous and ~utils.response_is_refusal(section_dict['Motivation_rigorous']):
+        if rigorous and not utils.response_is_refusal(section_dict['Motivation_rigorous']):
             section_dict['Motivation'] = section_dict['Motivation_rigorous']
-        for s, k in section_dict.items():
-            if s=='Bibliography':
-                print(utils.response_is_refusal(k))
-                print(k)
-                print(k=='X')
-                print(k==configs.refusal_response)
         paper_text = '*BREAK**BREAK*'.join(f'{s}*BREAK**BREAK*{section_dict[s]}' 
                                            for s in configs.paper_order 
-                                           if ~utils.response_is_refusal(section_dict[s]))
+                                           if not utils.response_is_refusal(section_dict[s]))
         paper_text = paper_text.replace('\n', ' ').replace("\'","'" ).replace('*BREAK*', ' \n').replace("Title \n", "")
         section_dict['paper_text'] = paper_text
 
