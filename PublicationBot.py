@@ -77,6 +77,7 @@ class pubBot:
                                       rigorous = prompt_kwargs['rigorous'])
         if save_output:
             self._save_output(output_dict = output_dict,
+                              effect_direction = effect_direction,
                               final_intervention = final_intervention, 
                               outcome = outcome)
         return output_dict
@@ -192,7 +193,8 @@ class pubBot:
         return section_dict
 
     def _save_output(self, 
-                    output_dict:dict, 
+                    output_dict: dict, 
+                    effect_direction: str,
                     final_intervention: str,
                     outcome: str):
         """"
@@ -200,6 +202,7 @@ class pubBot:
 
         Parameters:
         - output_dict (dict): dictionary containing results of paper writing prompts. must contains keys of 'Data Collection', 'Title', 'paper_text', and 'paper_text_formatted'
+        - effect_direction (str): effect driection
         - final_intervention (str): Description of the final intervention.
         - outcome (str): Description of the outcome.
 
@@ -214,7 +217,7 @@ class pubBot:
                     + self.LLM.version 
                     + '_' 
                     + final_intervention.replace(' ', '_')
-                    + '_CAUSE_' 
+                    + f'_{effect_direction}_' 
                     + outcome.replace(' ', '_')
         )
         
