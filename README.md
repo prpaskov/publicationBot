@@ -29,7 +29,7 @@ Two systems are used to write and edit the paper: Garth (writer) and Sia (editor
 - Write a title.
 - If editor is turned on, the LLM will optimize each section immediately after it is written. 
 
-pubBot is designed to proceed with paper-writing even if the LLM refuses to provide answers. 
+pubBot is designed to proceed with paper-writing even if the LLM refuses to provide answers, either by autofilling responses with a default value or by excluding refused sections from the final paper.
 
 ## How to install
 ```python
@@ -51,10 +51,10 @@ author = pubBot(model = <str>,
                 verbose = <bool>)
 ```
 **Parameters:**
-- model: "claude", "chatgpt" or "gemini"
-- temperature: temperature of model from 0-2. If not specified, will use model default value. 
-- version: version of model to use (i.e. 'gpt-3.5-turbo'). If not specified, will use most recent version of specified model.
-- verbose: if True, prints prompts and responses during writing process. If not specified, defaults to False.
+- ```model (str)```: ```"claude"```, ```"chatgpt"``` or ```"gemini"```
+- ```temperature (float)```: temperature of model from 0-2. If not specified, will use model default value. 
+- ```version (str)```: version of model to use (i.e. 'gpt-3.5-turbo'). If not specified, will use most recent version of specified model.
+- ```verbose (bool)```: if ```True```, prints prompts and responses during writing process. If not specified, defaults to ```False```.
 
 ### Run write_paper
 ```python
