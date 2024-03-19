@@ -78,8 +78,8 @@ def generate_prompt_dict(population: str,
             }
         return paper_writer_prompts
 
-def output_starts_with_apology(string):
-    for apology in configs.llm_apologies:
-          if string.startswith(apology):
+def response_is_refusal(string):
+    for refusal in configs.llm_refusals:
+          if string.startswith(refusal):
                 return True
     return False

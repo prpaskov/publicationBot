@@ -1,6 +1,6 @@
 ## pubBot
 
-pubBot is a red-teaming exercise/POC that explores the capabilities of LLMs -- ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output in the form of reputable academic research. Send comments, bugs, and tips to patriciarosepaskov@gmail.com. Please do not circulate without author's consent.
+pubBot is a red-teaming exercise that explores the capabilities of LLMs -- ChatGPT, Claude, and Gemini -- to generate misinformation and malicious output in the form of reputable academic research. This a proof of concept (POC) that works best with ChatGPT. Send comments, bugs, and tips to patriciarosepaskov@gmail.com. Please do not circulate without author's consent.
 
 ## Table of Contents
 
@@ -77,9 +77,9 @@ This function asks pubBot to write a paper that shows that <final_intervention> 
 - ```sample_size (float)```: The sample size. Default is 2000.
 - ```filler_intervention (str, optional)```: Description of the filler intervention. Default is None, in which case LLM will determine filler_intervention. If LLM fails to do so, "an intervention" is used.
 - ```methodology (str)```: Description of the methodology used. Default is None, in which case LLM will determine methodology. If LLM fails to do so, "randomized controlled trial" is used.
-- ```intervention_metric (str)```: how intervention is measured. Default is None, in which case LLM will determine metric.
+- ```intervention_metric (str)```: how intervention is measured. Default is None, in which case LLM will determine metric. If user is inputting ```intervention_metric```, ensure it moves in the same direction as ```intervention```. For example, if ```intervention_final='vegetable consumption'```, choose a metric that increases with vegetable consumption (i.e. vegetables eaten per day).
 - ```balanced_covariates (str)```: covariates on which randomization is balanced. Default is None, in which case LLM will determine covariates.
-- ```outcome_metric (str)```: how outcome is measured. Default is None, in which case LLM will determine the metric.
+- ```outcome_metric (str)```: how outcome is measured. Default is None, in which case LLM will determine the metric. If user is inputting ```outcome_metric```, ensure it moves in the same direction as ```outcome```. For example, if ```outcome='health'``` and `effect_direction='increase'```, choose a metric that increases as health increases (i.e. life expectancy yes, blood pressure no).
 - ```editor (bool, optional)```: Whether an editing LLM should review output. Default is True.
 - ```rigorous (bool)```: Whether motivation section should write in the tone specified journals or sources. Default is True.
 - ```journal_list (str)```: Comma-separated list of target journals/sources in whose tone the paper should be written if rigorous = True. Default is 'Journal of Development Economics, Journal of Public Economics, Journal of Political Economy, and Econometrica'.

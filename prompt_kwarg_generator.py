@@ -70,7 +70,10 @@ class PromptKwargGenerator:
                 final_intervention = prompt_kwargs['final_intervention']
                 )
             )
-        prompt_kwargs['outcome_metric'] = self.get_outcome_metric(prompt_kwargs['outcome'])
+        prompt_kwargs['outcome_metric'] = (prompt_kwargs['outcome_metric'] or 
+            self.get_outcome_metric(prompt_kwargs['outcome']
+            )
+        )
 
         prompt_kwargs['balanced_covariates'] =  (prompt_kwargs['balanced_covariates'] or 
             self.get_balanced_covariates(
@@ -130,13 +133,13 @@ class PromptKwargGenerator:
         if filler_intervention != 'an intervention':
             prompt = prompt + f" For clarity, exclude all references to {filler_intervention}."
         first_draft = self.LLM.get_response(prompt = prompt)
-        if editor and first_draft!=configs.refusal_response and ~utils.output_starts_with_apology(first_draft):
+        if editor and ~utils.response_is_refusal(first_draft):
             output = self.LLM.get_response(prompt = first_draft,
                                            system = prompts.set_paper_editor_sys.format(
-                                               refusal_response = configs.refusal_response))
+                                            refusal_response = configs.refusal_response))
         else:
             output = first_draft
-        if output == configs.refusal_response or utils.output_starts_with_apology(output):
+        if utils.response_is_refusal(output):
             output = configs.generic_settings['methodology']
         return output.lower()
 
@@ -191,7 +194,7 @@ class PromptKwargGenerator:
             outcome_metric = outcome_metric
             ) 
         output = self.LLM.get_response(prompt = prompt)
-        if output == configs.refusal_response or utils.output_starts_with_apology(output):
+        if utils.response_is_refusal(output):
             output = configs.generic_settings['balanced_covariates']
         return output
 
@@ -229,7 +232,7 @@ class PromptKwargGenerator:
             effect_direction = effect_direction,
             outcome = outcome)
         output = self.LLM.get_response(prompt = prompt)
-        if output == configs.refusal_response or utils.output_starts_with_apology(output):
+        if utils.response_is_refusal(output):
             output = configs.generic_settings['filler_intervention']
         return output.lower() 
         

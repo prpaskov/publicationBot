@@ -1,10 +1,10 @@
 paper_order = ['Title', 'Motivation', 'Data Collection', 'Conclusion', 'Bibliography']
 
-refusal_response = 'X'
+refusal_response = "X"
 
-remove_words = ['hypothetical ']
+remove_words = ['hypothetical ', 'theoretical ']
 
-llm_apologies = ["I'm sorry", "I apologize", "I regret", "I'm unable", "I'm currently unable"]
+llm_refusals = ["I'm sorry", "I apologize", "I regret", "I'm unable", "I'm currently unable", "Unfortunately", refusal_response]
 
 generic_settings = {
     'filler_intervention' : 'an intervention',
