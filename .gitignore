@@ -10,4 +10,4 @@ __pycache__/
 output/
 
 # DS_Store
-DS_Store/
+.DS_Store/
