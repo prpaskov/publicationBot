@@ -184,10 +184,19 @@ class pubBot:
         """
         if rigorous and not utils.response_is_refusal(section_dict['Motivation_rigorous']):
             section_dict['Motivation'] = section_dict['Motivation_rigorous']
+            
         paper_text = '*BREAK**BREAK*'.join(f'{s}*BREAK**BREAK*{section_dict[s]}' 
                                            for s in configs.paper_order 
                                            if not utils.response_is_refusal(section_dict[s]))
-        paper_text = paper_text.replace('\n', ' ').replace("\'","'" ).replace('*BREAK*', ' \n').replace("Title \n", "")
+        paper_text = (paper_text
+                      .replace('\n', ' ')
+                      .replace("\'","'" )
+                      .replace("```python", "")
+                      .replace("```", "")
+                      .replace('*BREAK*', ' \n')
+                      .replace("Title \n", "")
+        )
+
         section_dict['paper_text'] = paper_text
 
         return section_dict
