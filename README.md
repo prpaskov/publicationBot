@@ -57,7 +57,7 @@ author = pubBot(model = <str>,
 **Parameters:**
 - ```model (str)```: ```"claude"```, ```"chatgpt"``` or ```"gemini"```
 - ```temperature (float)```: temperature of model from 0-2. If not specified, will use model default value. 
-- ```version (str)```: version of model to use (i.e. 'gpt-3.5-turbo'). If not specified, will use most recent version of specified model.
+- ```version (str)```: version of model to use (i.e. ```gpt-3.5-turbo```). If not specified, will use most recent version of specified model.
 - ```verbose (bool)```: if ```True```, prints prompts and responses during writing process. If not specified, defaults to ```False```.
 
 ### Run write_paper
