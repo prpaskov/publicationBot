@@ -9,9 +9,8 @@ pubBot is a red-teaming exercise that explores the capabilities of LLMs -- ChatG
 3. [How to use](#how-to-use)
 4. [Notes on models](#notes-on-models)
 5. [Behind the scenes: tricks and alarm bells](#behind-the-scenes-tricks-and-alarm-bells)
-6. [Example paper](#example-paper)
-7. [Future directions](#future-directions)
-   
+6. [Future directions](#future-directions)
+7. [Example paper](#example-paper)
 
 ## Overview 
 
@@ -113,6 +112,18 @@ Alarm bells are set off in some cases. For example:
 - More advanced models won’t take in, edit, or reformat malicious text. In these cases, if ```editor=True```, pubBot will simply take the first draft response (i.e. for all paper sections) or a generic response (i.e. for methodology and filler intervention -- see ```generic_settings``` in configs.py). Note that the ```refusal_response``` specified in configs.py is a guardrail that allows developers to set up "second best" options when the system refuses to output text. If there is a concern about the LLM shutting down interactions entirely due to taking in malicious text (i.e. this sometimes occurs with Gemini), set ```editor = False.```
 - More advanced models are sensitive to being asked to write a bibliography or write according to the tone of academic journals. The code is set up to adapt to this (i.e. by taking a less rigorous tone and/or omitting the bibliography). If there is a concern about the LLM shutting down interactions entirely due to requests for bibliography or journal-specific tone, set ```rigorous = False.```
 
+## Future directions
+
+Potential extensions for this project include:
+- Strengthening malicious capabilities and reputability of output for enhanced red-teaming. For example, future iterations could:
+  -  Output code for analysis, tables, and graphs
+  -  Output directly to PDF
+  -  Include abstract
+  -  Ask LLM to generate inputs at scale
+  -  Improve prompts for higher credibility of methodology
+  -  Combine models: generate vague, initial output with a capable model (i.e. GPT-4), then feed to a less capable model (i.e. Llama-2) to substitute words and optimize.
+- Measuring and benchmarking impact of distinct prompt techniques on different models and versions
+
 ## Example papers
 
 The below papers were written by Chat-GPT 3.5. See run.ipynb for relevant inputs.
@@ -171,15 +182,3 @@ The research study on vaccinations and their impact on mental illness has reveal
 **Bibliography**
  
 Smith, J., Johnson, R., & Brown, A. (2018). The impact of specific vaccine adjuvants on neuroinflammation: Insights from a study in the Journal of Development Economics.  Jones, L., & Brown, D. (2016). Immunization-induced immune responses and their effects on neurotransmitter balance: A perspective from the Journal of Public Economics.  Garcia, M., & Martinez, S. (2017). Community concerns about vaccines and their implications for mental health: An analysis from the Journal of Political Economy.  White, T., & Robinson, P. (2019). Vaccine misinformation and its psychological implications: A review from Econometrica.  Chang, C., & Lee, H. (2020). Rare adverse effects of vaccines resembling mental health disorders: A synthesis of findings across multiple journals.
-
-## Future directions
-
-Potential extensions for this project include:
-- Strengthening malicious capabilities and reputability of output for enhanced red-teaming. For example, future iterations could:
-  -  Output code for analysis, tables, and graphs
-  -  Output directly to PDF
-  -  Include abstract
-  -  Ask LLM to generate inputs at scale
-  -  Improve prompts for higher credibility of methodology
-  -  Combine models: generate vague, initial output with a capable model (i.e. GPT-4), then feed to a less capable model (i.e. Llama-2) to substitute words and optimize.
-- Measuring and benchmarking impact of distinct prompt techniques on different models and versions
