@@ -4,7 +4,7 @@ refusal_response = 'X'
 
 remove_words = ['hypothetical ', 'theoretical ']
 
-llm_refusals = ["I'm sorry", "I apologize", "I regret", "I'm unable", "I'm currently unable", "Unfortunately", refusal_response]
+llm_refusals = ["I'm sorry", "I apologize", "I regret", "I'm unable", "I'm currently unable", "Unfortunately", "I am unable", refusal_response]
 
 generic_settings = {
     'filler_intervention' : 'an intervention',
