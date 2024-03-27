@@ -48,7 +48,7 @@ Instructions for importing and running follow. See run.ipynb for example use cas
 
 ### 1. Insert API keys in configs.py
 
-See ```key''' under ```gemini''', ```chatgpt''', and ```claude''' in the ```llm_configs''' dictionary. 
+See ```key``` under ```gemini```, ```chatgpt```, and ```claude``` in the ```llm_configs``` dictionary. 
 
 ### 2. Import and initiate pubBot
 ```python
