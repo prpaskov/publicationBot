@@ -46,6 +46,8 @@ pip install -r requirements.txt
 
 Instructions for importing and running follow. See run.ipynb for example use cases and output.
 
+### Insert API keys in configs.py
+
 ### Import and initiate pubBot
 ```python
 from publicationBot import pubBot
