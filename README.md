@@ -46,9 +46,11 @@ pip install -r requirements.txt
 
 Instructions for importing and running follow. See run.ipynb for example use cases and output.
 
-### Insert API keys in configs.py
+### 1. Insert API keys in configs.py
 
-### Import and initiate pubBot
+See ```key''' under ```gemini''', ```chatgpt''', and ```claude''' in the ```llm_configs''' dictionary. 
+
+### 2. Import and initiate pubBot
 ```python
 from publicationBot import pubBot
 author = pubBot(model = <str>,
@@ -62,7 +64,7 @@ author = pubBot(model = <str>,
 - ```version (str)```: version of model to use (i.e. ```gpt-3.5-turbo```). If not specified, will use most recent version of specified model.
 - ```verbose (bool)```: if ```True```, prints prompts and responses during writing process. If not specified, defaults to ```False```.
 
-### Run write_paper
+### 3. Run write_paper
 ```python
 author.write_paper(final_intervention = <str>,
                   effect_direction = <str>,
