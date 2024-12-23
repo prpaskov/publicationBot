@@ -44,7 +44,7 @@ pip install -r requirements.txt
 
 ## How to use
 
-Instructions for importing and running follow. See run.ipynb for example use cases and output.
+Instructions for importing and running follow. Contact author to see run.ipynb for example use cases and output.
 
 ### 1. Insert API keys in configs.py
 
